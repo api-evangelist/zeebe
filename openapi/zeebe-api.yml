@@ -1,0 +1,573 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST API
+  description: >-
+    The Zeebe REST API provides endpoints for interacting with the Zeebe workflow
+    engine that powers Camunda 8, including process deployment, instance management,
+    job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: '{baseUrl}/v2'
+    description: Zeebe Gateway REST API
+    variables:
+      baseUrl:
+        default: http://localhost:8080
+security:
+  - BearerAuth: []
+paths:
+  /topology:
+    get:
+      operationId: getTopology
+      summary: Get cluster topology
+      description: Returns the current topology of the Zeebe cluster including brokers and partitions.
+      tags:
+        - Cluster
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopologyResponse'
+  /deployments:
+    post:
+      operationId: deployResources
+      summary: Deploy resources
+      description: Deploys one or more BPMN process definitions, DMN decisions, or forms to Zeebe.
+      tags:
+        - Deployments
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                resources:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                tenantId:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentResponse'
+  /process-instances:
+    post:
+      operationId: createProcessInstance
+      summary: Create a process instance
+      description: Creates and starts a new process instance in Zeebe.
+      tags:
+        - Process Instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcessInstanceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+  /process-instances/{processInstanceKey}:
+    delete:
+      operationId: cancelProcessInstance
+      summary: Cancel a process instance
+      description: Cancels a running process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Process instance cancelled
+  /process-instances/{processInstanceKey}/migration:
+    post:
+      operationId: migrateProcessInstance
+      summary: Migrate a process instance
+      description: Migrates a process instance to a new process definition version.
+      tags:
+        - Process Instances
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                targetProcessDefinitionKey:
+                  type: integer
+                  format: int64
+                mappingInstructions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      sourceElementId:
+                        type: string
+                      targetElementId:
+                        type: string
+      responses:
+        '204':
+          description: Migration initiated
+  /jobs/activation:
+    post:
+      operationId: activateJobs
+      summary: Activate jobs
+      description: Activates jobs of a given type for processing by a worker.
+      tags:
+        - Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateJobsRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+  /jobs/{jobKey}/completion:
+    post:
+      operationId: completeJob
+      summary: Complete a job
+      description: Completes a job with the given payload.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Job completed
+  /jobs/{jobKey}/failure:
+    post:
+      operationId: failJob
+      summary: Fail a job
+      description: Reports a job failure to trigger retry or incident.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - retries
+              properties:
+                retries:
+                  type: integer
+                errorMessage:
+                  type: string
+                retryBackOff:
+                  type: integer
+                  format: int64
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Job failure reported
+  /jobs/{jobKey}/error:
+    post:
+      operationId: throwError
+      summary: Throw error for a job
+      description: Throws a BPMN error for a job to trigger error boundary events.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - errorCode
+              properties:
+                errorCode:
+                  type: string
+                errorMessage:
+                  type: string
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Error thrown
+  /jobs/{jobKey}/retries:
+    patch:
+      operationId: updateJobRetries
+      summary: Update job retries
+      description: Updates the number of retries for a job.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - retries
+              properties:
+                retries:
+                  type: integer
+      responses:
+        '204':
+          description: Job retries updated
+  /messages/publication:
+    post:
+      operationId: publishMessage
+      summary: Publish a message
+      description: Publishes a message for correlation with waiting subscriptions.
+      tags:
+        - Messages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageRequest'
+      responses:
+        '200':
+          description: Successful response
+  /signals/broadcast:
+    post:
+      operationId: broadcastSignal
+      summary: Broadcast a signal
+      description: Broadcasts a signal to all matching signal subscriptions.
+      tags:
+        - Signals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - signalName
+              properties:
+                signalName:
+                  type: string
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Signal broadcast
+  /incidents/{incidentKey}/resolution:
+    post:
+      operationId: resolveIncident
+      summary: Resolve an incident
+      description: Resolves an incident to retry the failed operation.
+      tags:
+        - Incidents
+      parameters:
+        - name: incidentKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Incident resolved
+  /resources/deletion:
+    post:
+      operationId: deleteResource
+      summary: Delete a resource
+      description: Deletes a deployed resource (process, decision, or form).
+      tags:
+        - Resources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceKey
+              properties:
+                resourceKey:
+                  type: integer
+                  format: int64
+      responses:
+        '204':
+          description: Resource deleted
+  /user-tasks/{userTaskKey}/assignment:
+    post:
+      operationId: assignUserTask
+      summary: Assign a user task
+      description: Assigns a user task to a specific user.
+      tags:
+        - User Tasks
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee:
+                  type: string
+                allowOverride:
+                  type: boolean
+      responses:
+        '204':
+          description: Task assigned
+  /user-tasks/{userTaskKey}/completion:
+    post:
+      operationId: completeUserTask
+      summary: Complete a user task
+      description: Completes a user task with optional variables.
+      tags:
+        - User Tasks
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Task completed
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    TopologyResponse:
+      type: object
+      properties:
+        brokers:
+          type: array
+          items:
+            type: object
+            properties:
+              nodeId:
+                type: integer
+              host:
+                type: string
+              port:
+                type: integer
+              version:
+                type: string
+              partitions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    partitionId:
+                      type: integer
+                    role:
+                      type: string
+                    health:
+                      type: string
+        clusterSize:
+          type: integer
+        partitionsCount:
+          type: integer
+        replicationFactor:
+          type: integer
+        gatewayVersion:
+          type: string
+    DeploymentResponse:
+      type: object
+      properties:
+        deploymentKey:
+          type: integer
+          format: int64
+        deployments:
+          type: array
+          items:
+            type: object
+        tenantId:
+          type: string
+    CreateProcessInstanceRequest:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        variables:
+          type: object
+        tenantId:
+          type: string
+    ProcessInstance:
+      type: object
+      properties:
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        tenantId:
+          type: string
+    ActivateJobsRequest:
+      type: object
+      required:
+        - type
+        - timeout
+        - maxJobsToActivate
+      properties:
+        type:
+          type: string
+        timeout:
+          type: integer
+          format: int64
+        maxJobsToActivate:
+          type: integer
+        worker:
+          type: string
+        fetchVariable:
+          type: array
+          items:
+            type: string
+        tenantIds:
+          type: array
+          items:
+            type: string
+    Job:
+      type: object
+      properties:
+        jobKey:
+          type: integer
+          format: int64
+        type:
+          type: string
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        elementId:
+          type: string
+        elementInstanceKey:
+          type: integer
+          format: int64
+        customHeaders:
+          type: object
+        worker:
+          type: string
+        retries:
+          type: integer
+        deadline:
+          type: integer
+          format: int64
+        variables:
+          type: object
+        tenantId:
+          type: string
+    PublishMessageRequest:
+      type: object
+      required:
+        - name
+        - correlationKey
+      properties:
+        name:
+          type: string
+        correlationKey:
+          type: string
+        timeToLive:
+          type: integer
+          format: int64
+        messageId:
+          type: string
+        variables:
+          type: object
+        tenantId:
+          type: string

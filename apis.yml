@@ -37,7 +37,9 @@ apis:
       - Process Automation
       - Distributed Systems
       - Java
-    properties: []
+    properties:
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/openapi/zeebe-api.yml
 common:
   - type: Website
     url: https://camunda.com/platform/zeebe/
