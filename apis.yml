@@ -1,11 +1,20 @@
 aid: zeebe
 name: Zeebe
 description: >-
-  Zeebe is a workflow engine for microservices orchestration from Camunda providing scalable, resilient workflow automation.
+  Zeebe is the cloud-native workflow engine that powers Camunda 8, providing
+  scalable, resilient workflow automation and microservices orchestration without
+  relying on a central database, enabling high throughput with horizontal scaling.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - Workflow Orchestration
   - Microservices
+  - Cloud Native
+  - BPMN
+  - Camunda
+  - Process Automation
+  - Distributed Systems
+  - Java
 url: >-
   https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -15,14 +24,37 @@ apis:
   - aid: zeebe:zeebe
     name: Zeebe
     description: >-
-      Zeebe is a workflow engine for microservices orchestration from Camunda providing scalable, resilient workflow automation.
-    humanURL: https://github.com/api-evangelist/zeebe
+      Zeebe is the cloud-native workflow engine that powers Camunda 8, providing
+      scalable, resilient workflow automation and microservices orchestration
+      without relying on a central database.
+    humanURL: https://camunda.com/platform/zeebe/
     tags:
+      - Workflow Orchestration
       - Microservices
+      - Cloud Native
+      - BPMN
+      - Camunda
+      - Process Automation
+      - Distributed Systems
+      - Java
     properties: []
 common:
   - type: Website
-    url: https://github.com/api-evangelist/zeebe
+    url: https://camunda.com/platform/zeebe/
+  - type: Documentation
+    url: https://docs.camunda.io/docs/components/zeebe/zeebe-overview/
+  - type: Getting Started
+    url: https://docs.camunda.io/docs/guides/
+  - type: GitHub
+    url: https://github.com/camunda/camunda
+  - type: GitHub Org
+    url: https://github.com/camunda
+  - type: Pricing
+    url: https://camunda.com/pricing/
+  - type: Blog
+    url: https://camunda.com/blog/
+  - type: Issues
+    url: https://github.com/camunda/camunda/issues
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
