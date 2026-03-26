@@ -1,0 +1,28 @@
+aid: zeebe
+name: Zeebe
+description: >-
+  Zeebe is a workflow engine for microservices orchestration from Camunda providing scalable, resilient workflow automation.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Microservices
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: zeebe:zeebe
+    name: Zeebe
+    description: >-
+      Zeebe is a workflow engine for microservices orchestration from Camunda providing scalable, resilient workflow automation.
+    humanURL: https://github.com/api-evangelist/zeebe
+    tags:
+      - Microservices
+    properties: []
+common:
+  - type: Website
+    url: https://github.com/api-evangelist/zeebe
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
