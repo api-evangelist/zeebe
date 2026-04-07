@@ -7,14 +7,14 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Workflow Orchestration
-  - Microservices
-  - Cloud Native
   - BPMN
   - Camunda
-  - Process Automation
+  - Cloud Native
   - Distributed Systems
   - Java
+  - Microservices
+  - Process Automation
+  - Workflow Orchestration
 url: >-
   https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -29,14 +29,14 @@ apis:
       without relying on a central database.
     humanURL: https://camunda.com/platform/zeebe/
     tags:
-      - Workflow Orchestration
-      - Microservices
-      - Cloud Native
       - BPMN
       - Camunda
-      - Process Automation
+      - Cloud Native
       - Distributed Systems
       - Java
+      - Microservices
+      - Process Automation
+      - Workflow Orchestration
     properties:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/openapi/zeebe-api.yml
