@@ -1,0 +1,8 @@
+{
+  "name": "Example Name",
+  "correlationKey": "example-value",
+  "timeToLive": 100,
+  "messageId": "500123",
+  "variables": {},
+  "tenantId": "500123"
+}

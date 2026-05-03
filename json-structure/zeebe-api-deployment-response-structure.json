@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/zeebe-api-deployment-response-structure.json",
+  "name": "DeploymentResponse",
+  "description": "DeploymentResponse schema from Zeebe REST API",
+  "type": "object",
+  "properties": {
+    "deploymentKey": {
+      "type": "int64",
+      "example": 100
+    },
+    "deployments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "example": [
+        {}
+      ]
+    },
+    "tenantId": {
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

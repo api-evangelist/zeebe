@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PublishMessageRequest",
+  "description": "PublishMessageRequest schema from Zeebe REST API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/zeebe-api-publish-message-request-schema.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Example Name"
+    },
+    "correlationKey": {
+      "type": "string",
+      "example": "example-value"
+    },
+    "timeToLive": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "messageId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "variables": {
+      "type": "object",
+      "example": {}
+    },
+    "tenantId": {
+      "type": "string",
+      "example": "500123"
+    }
+  },
+  "required": [
+    "name",
+    "correlationKey"
+  ]
+}

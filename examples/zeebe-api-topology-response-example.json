@@ -1,0 +1,21 @@
+{
+  "brokers": [
+    {
+      "nodeId": 100,
+      "host": "example-value",
+      "port": 100,
+      "version": "1.0.0",
+      "partitions": [
+        {
+          "partitionId": {},
+          "role": {},
+          "health": {}
+        }
+      ]
+    }
+  ],
+  "clusterSize": 100,
+  "partitionsCount": 100,
+  "replicationFactor": 100,
+  "gatewayVersion": "1.0.0"
+}

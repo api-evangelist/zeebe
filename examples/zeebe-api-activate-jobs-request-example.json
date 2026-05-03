@@ -1,0 +1,12 @@
+{
+  "type": "standard",
+  "timeout": 100,
+  "maxJobsToActivate": 100,
+  "worker": "example-value",
+  "fetchVariable": [
+    "example-value"
+  ],
+  "tenantIds": [
+    "example-value"
+  ]
+}

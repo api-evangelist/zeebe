@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/zeebe-api-topology-response-structure.json",
+  "name": "TopologyResponse",
+  "description": "TopologyResponse schema from Zeebe REST API",
+  "type": "object",
+  "properties": {
+    "brokers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nodeId": {
+            "type": "int32"
+          },
+          "host": {
+            "type": "string"
+          },
+          "port": {
+            "type": "int32"
+          },
+          "version": {
+            "type": "string"
+          },
+          "partitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "partitionId": {
+                  "type": "int32"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "health": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": [
+        {
+          "nodeId": 100,
+          "host": "example-value",
+          "port": 100,
+          "version": "1.0.0",
+          "partitions": [
+            {
+              "partitionId": {},
+              "role": {},
+              "health": {}
+            }
+          ]
+        }
+      ]
+    },
+    "clusterSize": {
+      "type": "int32",
+      "example": 100
+    },
+    "partitionsCount": {
+      "type": "int32",
+      "example": 100
+    },
+    "replicationFactor": {
+      "type": "int32",
+      "example": 100
+    },
+    "gatewayVersion": {
+      "type": "string",
+      "example": "1.0.0"
+    }
+  }
+}

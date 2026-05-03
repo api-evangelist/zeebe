@@ -1,0 +1,7 @@
+{
+  "processDefinitionKey": 100,
+  "bpmnProcessId": "500123",
+  "version": 100,
+  "variables": {},
+  "tenantId": "500123"
+}

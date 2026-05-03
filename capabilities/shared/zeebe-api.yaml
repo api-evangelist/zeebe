@@ -1,645 +1,166 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha1
 info:
-  label: "Zeebe REST API"
-  description: "The Zeebe REST API for interacting with the Zeebe workflow engine powering Camunda 8, including process deployment, instance management, job handling, message correlation, incident resolution, and cluster topology queries."
+  label: Zeebe REST API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster 
+    topology queries.
   tags:
-    - BPMN
-    - Camunda
-    - Cloud Native
-    - Workflow Orchestration
-    - Process Automation
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
-binds:
-  - namespace: env
-    keys:
-      ZEEBE_BEARER_TOKEN: ZEEBE_BEARER_TOKEN
-
+    - Zeebe
+  created: '2026-05-03'
+  modified: '2026-05-03'
 capability:
   consumes:
     - type: http
-      namespace: zeebe
-      baseUri: "{baseUrl}/v2"
-      description: "Zeebe workflow engine REST API"
-      authentication:
-        type: bearer
-        token: "{{ZEEBE_BEARER_TOKEN}}"
+      namespace: api
+      baseUri: '{baseUrl}/v2'
+      description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and 
+        cluster topology queries.
       resources:
-        - name: topology
-          path: /topology
-          description: "Cluster topology and health information"
+        - name: api
+          path: /
+          description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and 
+            cluster topology queries.
           operations:
             - name: get-topology
               method: GET
-              description: "Get cluster topology"
+              path: /topology
+              description: Zeebe Get Cluster Topology
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: deployments
-          path: /deployments
-          description: "Deploy BPMN, DMN, and form resources"
-          operations:
             - name: deploy-resources
               method: POST
-              description: "Deploy resources"
-              body:
-                type: multipart
-                data:
-                  resources: "{{tools.resources}}"
-                  tenantId: "{{tools.tenantId}}"
+              path: /deployments
+              description: Zeebe Deploy Resources
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: process-instances
-          path: /process-instances
-          description: "Manage process instances"
-          operations:
             - name: create-process-instance
               method: POST
-              description: "Create a process instance"
-              body:
-                type: json
-                data:
-                  processDefinitionKey: "{{tools.processDefinitionKey}}"
-                  bpmnProcessId: "{{tools.bpmnProcessId}}"
-                  version: "{{tools.version}}"
-                  variables: "{{tools.variables}}"
-                  tenantId: "{{tools.tenantId}}"
+              path: /process-instances
+              description: Zeebe Create a Process Instance
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: process-instance
-          path: /process-instances/{processInstanceKey}
-          description: "Manage a specific process instance"
-          operations:
             - name: cancel-process-instance
               method: DELETE
-              description: "Cancel a process instance"
+              path: /process-instances/{processInstanceKey}
+              description: Zeebe Cancel a Process Instance
               inputParameters:
                 - name: processInstanceKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the process instance to cancel"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: process-instance-migration
-          path: /process-instances/{processInstanceKey}/migration
-          description: "Migrate process instances to new versions"
-          operations:
             - name: migrate-process-instance
               method: POST
-              description: "Migrate a process instance"
+              path: /process-instances/{processInstanceKey}/migration
+              description: Zeebe Migrate a Process Instance
               inputParameters:
                 - name: processInstanceKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the process instance to migrate"
-              body:
-                type: json
-                data:
-                  targetProcessDefinitionKey: "{{tools.targetProcessDefinitionKey}}"
-                  mappingInstructions: "{{tools.mappingInstructions}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: jobs-activation
-          path: /jobs/activation
-          description: "Activate jobs for worker processing"
-          operations:
             - name: activate-jobs
               method: POST
-              description: "Activate jobs"
-              body:
-                type: json
-                data:
-                  type: "{{tools.type}}"
-                  timeout: "{{tools.timeout}}"
-                  maxJobsToActivate: "{{tools.maxJobsToActivate}}"
-                  worker: "{{tools.worker}}"
-                  fetchVariable: "{{tools.fetchVariable}}"
-                  tenantIds: "{{tools.tenantIds}}"
+              path: /jobs/activation
+              description: Zeebe Activate Jobs
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: job-completion
-          path: /jobs/{jobKey}/completion
-          description: "Complete a job"
-          operations:
             - name: complete-job
               method: POST
-              description: "Complete a job"
+              path: /jobs/{jobKey}/completion
+              description: Zeebe Complete a Job
               inputParameters:
                 - name: jobKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the job to complete"
-              body:
-                type: json
-                data:
-                  variables: "{{tools.variables}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: job-failure
-          path: /jobs/{jobKey}/failure
-          description: "Report a job failure"
-          operations:
             - name: fail-job
               method: POST
-              description: "Fail a job"
+              path: /jobs/{jobKey}/failure
+              description: Zeebe Fail a Job
               inputParameters:
                 - name: jobKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the job that failed"
-              body:
-                type: json
-                data:
-                  retries: "{{tools.retries}}"
-                  errorMessage: "{{tools.errorMessage}}"
-                  retryBackOff: "{{tools.retryBackOff}}"
-                  variables: "{{tools.variables}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: job-error
-          path: /jobs/{jobKey}/error
-          description: "Throw a BPMN error from a job"
-          operations:
             - name: throw-error
               method: POST
-              description: "Throw error for a job"
+              path: /jobs/{jobKey}/error
+              description: Zeebe Throw Error for a Job
               inputParameters:
                 - name: jobKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the job throwing the error"
-              body:
-                type: json
-                data:
-                  errorCode: "{{tools.errorCode}}"
-                  errorMessage: "{{tools.errorMessage}}"
-                  variables: "{{tools.variables}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: job-retries
-          path: /jobs/{jobKey}/retries
-          description: "Update job retry count"
-          operations:
             - name: update-job-retries
               method: PATCH
-              description: "Update job retries"
+              path: /jobs/{jobKey}/retries
+              description: Zeebe Update Job Retries
               inputParameters:
                 - name: jobKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the job to update"
-              body:
-                type: json
-                data:
-                  retries: "{{tools.retries}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: messages
-          path: /messages/publication
-          description: "Publish messages for process correlation"
-          operations:
             - name: publish-message
               method: POST
-              description: "Publish a message"
-              body:
-                type: json
-                data:
-                  name: "{{tools.name}}"
-                  correlationKey: "{{tools.correlationKey}}"
-                  timeToLive: "{{tools.timeToLive}}"
-                  messageId: "{{tools.messageId}}"
-                  variables: "{{tools.variables}}"
-                  tenantId: "{{tools.tenantId}}"
+              path: /messages/publication
+              description: Zeebe Publish a Message
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: signals
-          path: /signals/broadcast
-          description: "Broadcast signals to process subscriptions"
-          operations:
             - name: broadcast-signal
               method: POST
-              description: "Broadcast a signal"
-              body:
-                type: json
-                data:
-                  signalName: "{{tools.signalName}}"
-                  variables: "{{tools.variables}}"
+              path: /signals/broadcast
+              description: Zeebe Broadcast a Signal
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: incident-resolution
-          path: /incidents/{incidentKey}/resolution
-          description: "Resolve workflow incidents"
-          operations:
             - name: resolve-incident
               method: POST
-              description: "Resolve an incident"
+              path: /incidents/{incidentKey}/resolution
+              description: Zeebe Resolve an Incident
               inputParameters:
                 - name: incidentKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the incident to resolve"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: resources-deletion
-          path: /resources/deletion
-          description: "Delete deployed resources"
-          operations:
             - name: delete-resource
               method: POST
-              description: "Delete a resource"
-              body:
-                type: json
-                data:
-                  resourceKey: "{{tools.resourceKey}}"
+              path: /resources/deletion
+              description: Zeebe Delete a Resource
+              inputParameters: []
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: user-task-assignment
-          path: /user-tasks/{userTaskKey}/assignment
-          description: "Assign user tasks"
-          operations:
             - name: assign-user-task
               method: POST
-              description: "Assign a user task"
+              path: /user-tasks/{userTaskKey}/assignment
+              description: Zeebe Assign a User Task
               inputParameters:
                 - name: userTaskKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the user task to assign"
-              body:
-                type: json
-                data:
-                  assignee: "{{tools.assignee}}"
-                  allowOverride: "{{tools.allowOverride}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-        - name: user-task-completion
-          path: /user-tasks/{userTaskKey}/completion
-          description: "Complete user tasks"
-          operations:
             - name: complete-user-task
               method: POST
-              description: "Complete a user task"
+              path: /user-tasks/{userTaskKey}/completion
+              description: Zeebe Complete a User Task
               inputParameters:
                 - name: userTaskKey
                   in: path
                   type: integer
                   required: true
-                  description: "The key of the user task to complete"
-              body:
-                type: json
-                data:
-                  variables: "{{tools.variables}}"
+                  description: ''
               outputRawFormat: json
-              outputParameters:
-                - name: result
-                  type: object
-                  value: "$."
-
-  exposes:
-    - type: rest
-      port: 8100
-      namespace: zeebe-rest
-      resources:
-        - path: /v1/topology
-          name: topology
-          description: "Cluster topology"
-          operations:
-            - method: GET
-              name: get-topology
-              description: "Get cluster topology"
-              call: "zeebe.get-topology"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/deployments
-          name: deployments
-          description: "Process deployments"
-          operations:
-            - method: POST
-              name: deploy-resources
-              description: "Deploy resources"
-              call: "zeebe.deploy-resources"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/process-instances
-          name: process-instances
-          description: "Process instances"
-          operations:
-            - method: POST
-              name: create-process-instance
-              description: "Create a process instance"
-              call: "zeebe.create-process-instance"
-              with:
-                processDefinitionKey: "rest.processDefinitionKey"
-                bpmnProcessId: "rest.bpmnProcessId"
-                variables: "rest.variables"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/process-instances/{processInstanceKey}
-          name: process-instance
-          description: "Manage a process instance"
-          operations:
-            - method: DELETE
-              name: cancel-process-instance
-              description: "Cancel a process instance"
-              call: "zeebe.cancel-process-instance"
-              with:
-                processInstanceKey: "rest.processInstanceKey"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/jobs/activation
-          name: jobs-activation
-          description: "Activate jobs"
-          operations:
-            - method: POST
-              name: activate-jobs
-              description: "Activate jobs for processing"
-              call: "zeebe.activate-jobs"
-              with:
-                type: "rest.type"
-                timeout: "rest.timeout"
-                maxJobsToActivate: "rest.maxJobsToActivate"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/jobs/{jobKey}/completion
-          name: job-completion
-          description: "Complete a job"
-          operations:
-            - method: POST
-              name: complete-job
-              description: "Complete a job"
-              call: "zeebe.complete-job"
-              with:
-                jobKey: "rest.jobKey"
-                variables: "rest.variables"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/messages
-          name: messages
-          description: "Message publication"
-          operations:
-            - method: POST
-              name: publish-message
-              description: "Publish a message"
-              call: "zeebe.publish-message"
-              with:
-                name: "rest.name"
-                correlationKey: "rest.correlationKey"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9100
-      namespace: zeebe-mcp
-      transport: http
-      tools:
-        - name: get-topology
-          description: "Get the current Zeebe cluster topology"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "zeebe.get-topology"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: deploy-resources
-          description: "Deploy BPMN processes, DMN decisions, or forms to Zeebe"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "zeebe.deploy-resources"
-          with:
-            resources: "tools.resources"
-            tenantId: "tools.tenantId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-process-instance
-          description: "Create and start a new process instance"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "zeebe.create-process-instance"
-          with:
-            bpmnProcessId: "tools.bpmnProcessId"
-            variables: "tools.variables"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: cancel-process-instance
-          description: "Cancel a running process instance"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "zeebe.cancel-process-instance"
-          with:
-            processInstanceKey: "tools.processInstanceKey"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: activate-jobs
-          description: "Activate jobs of a given type for a worker to process"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "zeebe.activate-jobs"
-          with:
-            type: "tools.type"
-            maxJobsToActivate: "tools.maxJobsToActivate"
-            timeout: "tools.timeout"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: complete-job
-          description: "Complete a job with output variables"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "zeebe.complete-job"
-          with:
-            jobKey: "tools.jobKey"
-            variables: "tools.variables"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: fail-job
-          description: "Report a job failure to trigger retry or incident creation"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "zeebe.fail-job"
-          with:
-            jobKey: "tools.jobKey"
-            retries: "tools.retries"
-            errorMessage: "tools.errorMessage"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: throw-error
-          description: "Throw a BPMN error from a job to trigger error boundary events"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: false
-          call: "zeebe.throw-error"
-          with:
-            jobKey: "tools.jobKey"
-            errorCode: "tools.errorCode"
-            errorMessage: "tools.errorMessage"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: publish-message
-          description: "Publish a message for correlation with waiting process subscriptions"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "zeebe.publish-message"
-          with:
-            name: "tools.name"
-            correlationKey: "tools.correlationKey"
-            variables: "tools.variables"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: broadcast-signal
-          description: "Broadcast a signal to all matching signal subscriptions in processes"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "zeebe.broadcast-signal"
-          with:
-            signalName: "tools.signalName"
-            variables: "tools.variables"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: resolve-incident
-          description: "Resolve an incident to allow the failed operation to be retried"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "zeebe.resolve-incident"
-          with:
-            incidentKey: "tools.incidentKey"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: assign-user-task
-          description: "Assign a user task to a specific user"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "zeebe.assign-user-task"
-          with:
-            userTaskKey: "tools.userTaskKey"
-            assignee: "tools.assignee"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: complete-user-task
-          description: "Complete a user task with optional output variables"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "zeebe.complete-user-task"
-          with:
-            userTaskKey: "tools.userTaskKey"
-            variables: "tools.variables"
-          outputParameters:
-            - type: object
-              mapping: "$."
+      authentication:
+        type: bearer
+        token: '{{TOKEN}}'

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/zeebe-api-activate-jobs-request-structure.json",
+  "name": "ActivateJobsRequest",
+  "description": "ActivateJobsRequest schema from Zeebe REST API",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "example": "standard"
+    },
+    "timeout": {
+      "type": "int64",
+      "example": 100
+    },
+    "maxJobsToActivate": {
+      "type": "int32",
+      "example": 100
+    },
+    "worker": {
+      "type": "string",
+      "example": "example-value"
+    },
+    "fetchVariable": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "example-value"
+      ]
+    },
+    "tenantIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "example-value"
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "timeout",
+    "maxJobsToActivate"
+  ]
+}

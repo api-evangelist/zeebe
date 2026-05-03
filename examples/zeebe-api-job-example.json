@@ -1,0 +1,15 @@
+{
+  "jobKey": 100,
+  "type": "standard",
+  "processInstanceKey": 100,
+  "processDefinitionKey": 100,
+  "bpmnProcessId": "500123",
+  "elementId": "500123",
+  "elementInstanceKey": 100,
+  "customHeaders": {},
+  "worker": "example-value",
+  "retries": 100,
+  "deadline": 100,
+  "variables": {},
+  "tenantId": "500123"
+}

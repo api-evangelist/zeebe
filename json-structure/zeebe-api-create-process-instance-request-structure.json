@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/zeebe-api-create-process-instance-request-structure.json",
+  "name": "CreateProcessInstanceRequest",
+  "description": "CreateProcessInstanceRequest schema from Zeebe REST API",
+  "type": "object",
+  "properties": {
+    "processDefinitionKey": {
+      "type": "int64",
+      "example": 100
+    },
+    "bpmnProcessId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "version": {
+      "type": "int32",
+      "example": 100
+    },
+    "variables": {
+      "type": "object",
+      "example": {}
+    },
+    "tenantId": {
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

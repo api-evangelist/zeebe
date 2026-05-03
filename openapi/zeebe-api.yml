@@ -24,7 +24,7 @@ paths:
   /topology:
     get:
       operationId: getTopology
-      summary: Get cluster topology
+      summary: Zeebe Get Cluster Topology
       description: Returns the current topology of the Zeebe cluster including brokers and partitions.
       tags:
         - Cluster
@@ -35,10 +35,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TopologyResponse'
+              examples:
+                GetTopology200Example:
+                  summary: Default getTopology 200 response
+                  x-microcks-default: true
+                  value:
+                    brokers: &id001
+                      - nodeId: 100
+                        host: example-value
+                        port: 100
+                        version: 1.0.0
+                        partitions:
+                          - partitionId: {}
+                            role: {}
+                            health: {}
+                    clusterSize: 100
+                    partitionsCount: 100
+                    replicationFactor: 100
+                    gatewayVersion: 1.0.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /deployments:
     post:
       operationId: deployResources
-      summary: Deploy resources
+      summary: Zeebe Deploy Resources
       description: Deploys one or more BPMN process definitions, DMN decisions, or forms to Zeebe.
       tags:
         - Deployments
@@ -63,10 +84,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeploymentResponse'
+              examples:
+                DeployResources200Example:
+                  summary: Default deployResources 200 response
+                  x-microcks-default: true
+                  value:
+                    deploymentKey: 100
+                    deployments: &id002
+                      - {}
+                    tenantId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /process-instances:
     post:
       operationId: createProcessInstance
-      summary: Create a process instance
+      summary: Zeebe Create a Process Instance
       description: Creates and starts a new process instance in Zeebe.
       tags:
         - Process Instances
@@ -76,6 +109,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateProcessInstanceRequest'
+            examples:
+              CreateProcessInstanceRequestExample:
+                summary: Default createProcessInstance request
+                x-microcks-default: true
+                value:
+                  processDefinitionKey: 100
+                  bpmnProcessId: '500123'
+                  version: 100
+                  variables: &id003 {}
+                  tenantId: '500123'
       responses:
         '200':
           description: Successful response
@@ -83,10 +126,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProcessInstance'
+              examples:
+                CreateProcessInstance200Example:
+                  summary: Default createProcessInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    processInstanceKey: 100
+                    processDefinitionKey: 100
+                    bpmnProcessId: '500123'
+                    version: 100
+                    tenantId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /process-instances/{processInstanceKey}:
     delete:
       operationId: cancelProcessInstance
-      summary: Cancel a process instance
+      summary: Zeebe Cancel a Process Instance
       description: Cancels a running process instance.
       tags:
         - Process Instances
@@ -97,13 +153,17 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       responses:
         '204':
           description: Process instance cancelled
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /process-instances/{processInstanceKey}/migration:
     post:
       operationId: migrateProcessInstance
-      summary: Migrate a process instance
+      summary: Zeebe Migrate a Process Instance
       description: Migrates a process instance to a new process definition version.
       tags:
         - Process Instances
@@ -114,6 +174,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         required: true
         content:
@@ -133,13 +194,25 @@ paths:
                         type: string
                       targetElementId:
                         type: string
+            examples:
+              MigrateProcessInstanceRequestExample:
+                summary: Default migrateProcessInstance request
+                x-microcks-default: true
+                value:
+                  targetProcessDefinitionKey: 100
+                  mappingInstructions:
+                    - sourceElementId: '500123'
+                      targetElementId: '500123'
       responses:
         '204':
           description: Migration initiated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /jobs/activation:
     post:
       operationId: activateJobs
-      summary: Activate jobs
+      summary: Zeebe Activate Jobs
       description: Activates jobs of a given type for processing by a worker.
       tags:
         - Jobs
@@ -149,6 +222,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ActivateJobsRequest'
+            examples:
+              ActivateJobsRequestExample:
+                summary: Default activateJobs request
+                x-microcks-default: true
+                value:
+                  type: standard
+                  timeout: 100
+                  maxJobsToActivate: 100
+                  worker: example-value
+                  fetchVariable: &id004
+                    - example-value
+                  tenantIds: &id005
+                    - example-value
       responses:
         '200':
           description: Successful response
@@ -161,10 +247,20 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Job'
+              examples:
+                ActivateJobs200Example:
+                  summary: Default activateJobs 200 response
+                  x-microcks-default: true
+                  value:
+                    jobs:
+                      - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /jobs/{jobKey}/completion:
     post:
       operationId: completeJob
-      summary: Complete a job
+      summary: Zeebe Complete a Job
       description: Completes a job with the given payload.
       tags:
         - Jobs
@@ -175,6 +271,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         content:
           application/json:
@@ -183,13 +280,22 @@ paths:
               properties:
                 variables:
                   type: object
+            examples:
+              CompleteJobRequestExample:
+                summary: Default completeJob request
+                x-microcks-default: true
+                value:
+                  variables: {}
       responses:
         '204':
           description: Job completed
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /jobs/{jobKey}/failure:
     post:
       operationId: failJob
-      summary: Fail a job
+      summary: Zeebe Fail a Job
       description: Reports a job failure to trigger retry or incident.
       tags:
         - Jobs
@@ -200,6 +306,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         required: true
         content:
@@ -218,13 +325,25 @@ paths:
                   format: int64
                 variables:
                   type: object
+            examples:
+              FailJobRequestExample:
+                summary: Default failJob request
+                x-microcks-default: true
+                value:
+                  retries: 100
+                  errorMessage: example-value
+                  retryBackOff: 100
+                  variables: {}
       responses:
         '204':
           description: Job failure reported
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /jobs/{jobKey}/error:
     post:
       operationId: throwError
-      summary: Throw error for a job
+      summary: Zeebe Throw Error for a Job
       description: Throws a BPMN error for a job to trigger error boundary events.
       tags:
         - Jobs
@@ -235,6 +354,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         required: true
         content:
@@ -250,13 +370,24 @@ paths:
                   type: string
                 variables:
                   type: object
+            examples:
+              ThrowErrorRequestExample:
+                summary: Default throwError request
+                x-microcks-default: true
+                value:
+                  errorCode: example-value
+                  errorMessage: example-value
+                  variables: {}
       responses:
         '204':
           description: Error thrown
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /jobs/{jobKey}/retries:
     patch:
       operationId: updateJobRetries
-      summary: Update job retries
+      summary: Zeebe Update Job Retries
       description: Updates the number of retries for a job.
       tags:
         - Jobs
@@ -267,6 +398,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         required: true
         content:
@@ -278,13 +410,22 @@ paths:
               properties:
                 retries:
                   type: integer
+            examples:
+              UpdateJobRetriesRequestExample:
+                summary: Default updateJobRetries request
+                x-microcks-default: true
+                value:
+                  retries: 100
       responses:
         '204':
           description: Job retries updated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /messages/publication:
     post:
       operationId: publishMessage
-      summary: Publish a message
+      summary: Zeebe Publish a Message
       description: Publishes a message for correlation with waiting subscriptions.
       tags:
         - Messages
@@ -294,13 +435,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PublishMessageRequest'
+            examples:
+              PublishMessageRequestExample:
+                summary: Default publishMessage request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  correlationKey: example-value
+                  timeToLive: 100
+                  messageId: '500123'
+                  variables: &id006 {}
+                  tenantId: '500123'
       responses:
         '200':
           description: Successful response
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /signals/broadcast:
     post:
       operationId: broadcastSignal
-      summary: Broadcast a signal
+      summary: Zeebe Broadcast a Signal
       description: Broadcasts a signal to all matching signal subscriptions.
       tags:
         - Signals
@@ -317,13 +472,23 @@ paths:
                   type: string
                 variables:
                   type: object
+            examples:
+              BroadcastSignalRequestExample:
+                summary: Default broadcastSignal request
+                x-microcks-default: true
+                value:
+                  signalName: Example Name
+                  variables: {}
       responses:
         '204':
           description: Signal broadcast
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /incidents/{incidentKey}/resolution:
     post:
       operationId: resolveIncident
-      summary: Resolve an incident
+      summary: Zeebe Resolve an Incident
       description: Resolves an incident to retry the failed operation.
       tags:
         - Incidents
@@ -334,13 +499,17 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       responses:
         '204':
           description: Incident resolved
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /resources/deletion:
     post:
       operationId: deleteResource
-      summary: Delete a resource
+      summary: Zeebe Delete a Resource
       description: Deletes a deployed resource (process, decision, or form).
       tags:
         - Resources
@@ -356,13 +525,22 @@ paths:
                 resourceKey:
                   type: integer
                   format: int64
+            examples:
+              DeleteResourceRequestExample:
+                summary: Default deleteResource request
+                x-microcks-default: true
+                value:
+                  resourceKey: 100
       responses:
         '204':
           description: Resource deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /user-tasks/{userTaskKey}/assignment:
     post:
       operationId: assignUserTask
-      summary: Assign a user task
+      summary: Zeebe Assign a User Task
       description: Assigns a user task to a specific user.
       tags:
         - User Tasks
@@ -373,6 +551,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         required: true
         content:
@@ -384,13 +563,23 @@ paths:
                   type: string
                 allowOverride:
                   type: boolean
+            examples:
+              AssignUserTaskRequestExample:
+                summary: Default assignUserTask request
+                x-microcks-default: true
+                value:
+                  assignee: example-value
+                  allowOverride: true
       responses:
         '204':
           description: Task assigned
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /user-tasks/{userTaskKey}/completion:
     post:
       operationId: completeUserTask
-      summary: Complete a user task
+      summary: Zeebe Complete a User Task
       description: Completes a user task with optional variables.
       tags:
         - User Tasks
@@ -401,6 +590,7 @@ paths:
           schema:
             type: integer
             format: int64
+          example: 100
       requestBody:
         content:
           application/json:
@@ -409,9 +599,18 @@ paths:
               properties:
                 variables:
                   type: object
+            examples:
+              CompleteUserTaskRequestExample:
+                summary: Default completeUserTask request
+                x-microcks-default: true
+                value:
+                  variables: {}
       responses:
         '204':
           description: Task completed
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     BearerAuth:
@@ -445,55 +644,73 @@ components:
                       type: string
                     health:
                       type: string
+          example: *id001
         clusterSize:
           type: integer
+          example: 100
         partitionsCount:
           type: integer
+          example: 100
         replicationFactor:
           type: integer
+          example: 100
         gatewayVersion:
           type: string
+          example: 1.0.0
     DeploymentResponse:
       type: object
       properties:
         deploymentKey:
           type: integer
           format: int64
+          example: 100
         deployments:
           type: array
           items:
             type: object
+          example: *id002
         tenantId:
           type: string
+          example: '500123'
     CreateProcessInstanceRequest:
       type: object
       properties:
         processDefinitionKey:
           type: integer
           format: int64
+          example: 100
         bpmnProcessId:
           type: string
+          example: '500123'
         version:
           type: integer
+          example: 100
         variables:
           type: object
+          example: *id003
         tenantId:
           type: string
+          example: '500123'
     ProcessInstance:
       type: object
       properties:
         processInstanceKey:
           type: integer
           format: int64
+          example: 100
         processDefinitionKey:
           type: integer
           format: int64
+          example: 100
         bpmnProcessId:
           type: string
+          example: '500123'
         version:
           type: integer
+          example: 100
         tenantId:
           type: string
+          example: '500123'
     ActivateJobsRequest:
       type: object
       required:
@@ -503,55 +720,74 @@ components:
       properties:
         type:
           type: string
+          example: standard
         timeout:
           type: integer
           format: int64
+          example: 100
         maxJobsToActivate:
           type: integer
+          example: 100
         worker:
           type: string
+          example: example-value
         fetchVariable:
           type: array
           items:
             type: string
+          example: *id004
         tenantIds:
           type: array
           items:
             type: string
+          example: *id005
     Job:
       type: object
       properties:
         jobKey:
           type: integer
           format: int64
+          example: 100
         type:
           type: string
+          example: standard
         processInstanceKey:
           type: integer
           format: int64
+          example: 100
         processDefinitionKey:
           type: integer
           format: int64
+          example: 100
         bpmnProcessId:
           type: string
+          example: '500123'
         elementId:
           type: string
+          example: '500123'
         elementInstanceKey:
           type: integer
           format: int64
+          example: 100
         customHeaders:
           type: object
+          example: {}
         worker:
           type: string
+          example: example-value
         retries:
           type: integer
+          example: 100
         deadline:
           type: integer
           format: int64
+          example: 100
         variables:
           type: object
+          example: {}
         tenantId:
           type: string
+          example: '500123'
     PublishMessageRequest:
       type: object
       required:
@@ -560,14 +796,20 @@ components:
       properties:
         name:
           type: string
+          example: Example Name
         correlationKey:
           type: string
+          example: example-value
         timeToLive:
           type: integer
           format: int64
+          example: 100
         messageId:
           type: string
+          example: '500123'
         variables:
           type: object
+          example: *id006
         tenantId:
           type: string
+          example: '500123'

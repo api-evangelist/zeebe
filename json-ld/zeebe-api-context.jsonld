@@ -1,0 +1,125 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "zeebe": "https://zeebe.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DeploymentResponse": "zeebe:DeploymentResponse",
+    "Job": "zeebe:Job",
+    "ProcessInstance": "zeebe:ProcessInstance",
+    "TopologyResponse": "zeebe:TopologyResponse",
+    "deploymentKey": {
+      "@id": "zeebe:deploymentKey",
+      "@type": "xsd:integer"
+    },
+    "deployments": {
+      "@id": "zeebe:deployments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "tenantId": {
+      "@id": "zeebe:tenantId",
+      "@type": "xsd:string"
+    },
+    "jobKey": {
+      "@id": "zeebe:jobKey",
+      "@type": "xsd:integer"
+    },
+    "type": {
+      "@id": "zeebe:type",
+      "@type": "xsd:string"
+    },
+    "processInstanceKey": {
+      "@id": "zeebe:processInstanceKey",
+      "@type": "xsd:integer"
+    },
+    "processDefinitionKey": {
+      "@id": "zeebe:processDefinitionKey",
+      "@type": "xsd:integer"
+    },
+    "bpmnProcessId": {
+      "@id": "zeebe:bpmnProcessId",
+      "@type": "xsd:string"
+    },
+    "elementId": {
+      "@id": "zeebe:elementId",
+      "@type": "xsd:string"
+    },
+    "elementInstanceKey": {
+      "@id": "zeebe:elementInstanceKey",
+      "@type": "xsd:integer"
+    },
+    "customHeaders": {
+      "@id": "zeebe:customHeaders",
+      "@type": "@id"
+    },
+    "worker": {
+      "@id": "zeebe:worker",
+      "@type": "xsd:string"
+    },
+    "retries": {
+      "@id": "zeebe:retries",
+      "@type": "xsd:integer"
+    },
+    "deadline": {
+      "@id": "zeebe:deadline",
+      "@type": "xsd:integer"
+    },
+    "variables": {
+      "@id": "zeebe:variables",
+      "@type": "@id"
+    },
+    "version": "schema:version",
+    "brokers": {
+      "@id": "zeebe:brokers",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "nodeId": {
+      "@id": "zeebe:nodeId",
+      "@type": "xsd:integer"
+    },
+    "host": {
+      "@id": "zeebe:host",
+      "@type": "xsd:string"
+    },
+    "port": {
+      "@id": "zeebe:port",
+      "@type": "xsd:integer"
+    },
+    "partitions": {
+      "@id": "zeebe:partitions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "partitionId": {
+      "@id": "zeebe:partitionId",
+      "@type": "xsd:integer"
+    },
+    "role": {
+      "@id": "zeebe:role",
+      "@type": "xsd:string"
+    },
+    "health": {
+      "@id": "zeebe:health",
+      "@type": "xsd:string"
+    },
+    "clusterSize": {
+      "@id": "zeebe:clusterSize",
+      "@type": "xsd:integer"
+    },
+    "partitionsCount": {
+      "@id": "zeebe:partitionsCount",
+      "@type": "xsd:integer"
+    },
+    "replicationFactor": {
+      "@id": "zeebe:replicationFactor",
+      "@type": "xsd:integer"
+    },
+    "gatewayVersion": {
+      "@id": "zeebe:gatewayVersion",
+      "@type": "xsd:string"
+    }
+  }
+}

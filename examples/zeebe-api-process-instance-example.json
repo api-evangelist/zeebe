@@ -1,0 +1,7 @@
+{
+  "processInstanceKey": 100,
+  "processDefinitionKey": 100,
+  "bpmnProcessId": "500123",
+  "version": 100,
+  "tenantId": "500123"
+}

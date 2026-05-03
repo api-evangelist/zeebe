@@ -1,87 +1,156 @@
-extends: ["spectral:oas"]
-
 rules:
-  # Zeebe uses int64 keys for all resource identifiers
-  zeebe-key-type-int64:
-    description: Zeebe resource keys must use type integer with format int64
-    message: "Key field '{{property}}' must be type integer with format int64"
+  info-title-required:
+    description: API title is required
+    message: '{{property}} is required'
     severity: error
-    given: "$.components.schemas..[?(@property === 'Key' || @property.match(/Key$/))]"
+    given: $.info
     then:
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          properties:
-            type:
-              const: integer
-            format:
-              const: int64
-
-  # Zeebe REST paths must have /v2 prefix (handled by server base URL)
-  zeebe-operation-ids-camel-case:
-    description: Zeebe operationIds must use camelCase
-    message: "operationId '{{value}}' must be camelCase"
+      field: title
+      function: truthy
+  info-description-required:
+    description: API description is required
+    message: '{{property}} is required'
     severity: warn
-    given: "$.paths.*.*.operationId"
+    given: $.info
     then:
+      field: description
+      function: truthy
+  info-version-required:
+    description: API version is required
+    message: '{{property}} is required'
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  info-contact-required:
+    description: API contact is required
+    message: '{{property}} is required'
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  openapi-version-3:
+    description: OpenAPI version should be 3.x
+    message: Use OpenAPI 3.x
+    severity: warn
+    given: $
+    then:
+      field: openapi
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
-  # All Zeebe action paths use noun-based sub-resources
-  zeebe-action-path-pattern:
-    description: Zeebe action endpoints should use /noun/action pattern (e.g., /jobs/{key}/completion)
-    message: "Consider using noun/action pattern for Zeebe action endpoints"
-    severity: info
-    given: "$.paths"
-    then:
-      function: truthy
-
-  # Zeebe responses use 204 for mutations (non-data-returning)
-  zeebe-mutation-response-204:
-    description: Zeebe mutation operations that return no body should use 204
-    message: "Mutation operation should return 204 for no-body responses"
-    severity: warn
-    given: "$.paths.*.post[responses]"
-    then:
-      function: truthy
-
-  # All paths must have operationId
-  zeebe-operation-id-required:
-    description: All Zeebe operations must have an operationId
-    message: "Operation must have an operationId"
+        match: ^3\.
+  servers-required:
+    description: Servers must be defined
+    message: Define servers
     severity: error
-    given: "$.paths.*.*"
+    given: $
+    then:
+      field: servers
+      function: truthy
+  servers-https:
+    description: Server URLs should use HTTPS
+    message: Use HTTPS
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: ^https://
+  paths-no-trailing-slash:
+    description: Paths must not have trailing slashes
+    message: Remove trailing slash
+    severity: warn
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        notMatch: .+/$
+  paths-kebab-case:
+    description: Path segments should be kebab-case
+    message: Use kebab-case
+    severity: warn
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^(/[a-z0-9-]+|/\{[a-zA-Z][a-zA-Z0-9_]*\})+/?$
+  operation-summary-required:
+    description: Operation summary is required
+    message: Add a summary
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  operation-description-required:
+    description: Operation description is required
+    message: Add a description
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+  operation-operationId-required:
+    description: operationId is required
+    message: Add operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: truthy
-
-  # Tags must be defined for all operations
-  zeebe-operation-tags-required:
-    description: All Zeebe operations must have at least one tag
-    message: "Operation must have at least one tag"
+  operation-tags-required:
+    description: Operation tags are required
+    message: Add tags
     severity: warn
-    given: "$.paths.*.*"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: truthy
-
-  # Zeebe uses tenantId for multi-tenancy
-  zeebe-multi-tenant-support:
-    description: Zeebe multi-tenant operations should document tenantId
-    message: "Consider documenting tenantId for multi-tenant support"
-    severity: info
-    given: "$.components.schemas..*[?(@property === 'tenantId')]"
+  operation-summary-prefix-zeebe:
+    description: Operation summary should start with "Zeebe"
+    message: Summary should start with "Zeebe"
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
     then:
+      function: pattern
+      functionOptions:
+        match: ^Zeebe
+  parameter-description-required:
+    description: Parameters need a description
+    message: Add a description
+    severity: warn
+    given: $.paths[*][*].parameters[*]
+    then:
+      field: description
       function: truthy
-
-  # Bearer auth must be used
-  zeebe-bearer-auth-required:
-    description: Zeebe API requires Bearer authentication
-    message: "BearerAuth security scheme must be defined"
+  response-2xx-required:
+    description: Operations must define a 2xx success response
+    message: Add a 2xx response
     severity: error
-    given: "$.components.securitySchemes"
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
-      field: BearerAuth
+      function: pattern
+      functionOptions:
+        match: ^[23]
+      field: '@key'
+  schema-description-required:
+    description: Top-level schemas need a description
+    message: Add a description
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+  security-schemes-defined:
+    description: Security schemes should be defined
+    message: Define securitySchemes
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
       function: truthy

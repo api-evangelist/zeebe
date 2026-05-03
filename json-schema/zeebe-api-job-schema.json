@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Job",
+  "description": "Job schema from Zeebe REST API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/zeebe-api-job-schema.json",
+  "type": "object",
+  "properties": {
+    "jobKey": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "type": {
+      "type": "string",
+      "example": "standard"
+    },
+    "processInstanceKey": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "processDefinitionKey": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "bpmnProcessId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "elementId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "elementInstanceKey": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "customHeaders": {
+      "type": "object",
+      "example": {}
+    },
+    "worker": {
+      "type": "string",
+      "example": "example-value"
+    },
+    "retries": {
+      "type": "integer",
+      "example": 100
+    },
+    "deadline": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "variables": {
+      "type": "object",
+      "example": {}
+    },
+    "tenantId": {
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

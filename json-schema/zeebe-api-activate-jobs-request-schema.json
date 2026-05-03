@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ActivateJobsRequest",
+  "description": "ActivateJobsRequest schema from Zeebe REST API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/zeebe-api-activate-jobs-request-schema.json",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "example": "standard"
+    },
+    "timeout": {
+      "type": "integer",
+      "format": "int64",
+      "example": 100
+    },
+    "maxJobsToActivate": {
+      "type": "integer",
+      "example": 100
+    },
+    "worker": {
+      "type": "string",
+      "example": "example-value"
+    },
+    "fetchVariable": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "example-value"
+      ]
+    },
+    "tenantIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "example-value"
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "timeout",
+    "maxJobsToActivate"
+  ]
+}

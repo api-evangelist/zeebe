@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/zeebe-api-job-structure.json",
+  "name": "Job",
+  "description": "Job schema from Zeebe REST API",
+  "type": "object",
+  "properties": {
+    "jobKey": {
+      "type": "int64",
+      "example": 100
+    },
+    "type": {
+      "type": "string",
+      "example": "standard"
+    },
+    "processInstanceKey": {
+      "type": "int64",
+      "example": 100
+    },
+    "processDefinitionKey": {
+      "type": "int64",
+      "example": 100
+    },
+    "bpmnProcessId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "elementId": {
+      "type": "string",
+      "example": "500123"
+    },
+    "elementInstanceKey": {
+      "type": "int64",
+      "example": 100
+    },
+    "customHeaders": {
+      "type": "object",
+      "example": {}
+    },
+    "worker": {
+      "type": "string",
+      "example": "example-value"
+    },
+    "retries": {
+      "type": "int32",
+      "example": 100
+    },
+    "deadline": {
+      "type": "int64",
+      "example": 100
+    },
+    "variables": {
+      "type": "object",
+      "example": {}
+    },
+    "tenantId": {
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

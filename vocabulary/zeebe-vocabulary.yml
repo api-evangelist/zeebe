@@ -1,174 +1,109 @@
-vocabulary:
-  name: Zeebe Vocabulary
-  description: Domain vocabulary for the Zeebe workflow engine and Camunda 8 process orchestration platform.
-  version: "1.0"
-  created: "2026-05-03"
-  modified: "2026-05-03"
-  tags:
-    - BPMN
-    - Camunda
-    - Cloud Native
-    - Process Automation
-    - Workflow Orchestration
-
-terms:
-  - term: BPMN
-    label: Business Process Model and Notation
-    definition: An ISO standard graphical notation for specifying business processes. Zeebe executes BPMN 2.0 process definitions.
-    tags:
-      - Standard
-      - Process Modeling
-
-  - term: Process Definition
-    label: Process Definition
-    definition: A deployed BPMN model that describes the workflow steps, gateways, events, and tasks. Each deployment creates a versioned process definition.
-    tags:
-      - Core Concept
-      - Deployment
-
-  - term: Process Instance
-    label: Process Instance
-    definition: A single running execution of a process definition. Multiple instances can run concurrently from the same definition.
-    tags:
-      - Core Concept
-      - Runtime
-
-  - term: Job
-    label: Job
-    definition: A unit of work created by a service task in a process. Workers poll for and execute jobs of their registered type.
-    tags:
-      - Core Concept
-      - Worker Pattern
-
-  - term: Worker
-    label: Job Worker
-    definition: A client application that polls for and processes jobs. Workers activate jobs, execute the business logic, and report completion or failure.
-    tags:
-      - Integration Pattern
-      - Runtime
-
-  - term: Job Activation
-    label: Job Activation
-    definition: The process of a worker claiming and locking a job for processing. Activation includes a timeout after which the job can be reclaimed.
-    tags:
-      - Worker Pattern
-      - Runtime
-
-  - term: Message
-    label: Message
-    definition: A named, correlatable event used to communicate between a message sender and a waiting process instance. Correlated by a correlation key.
-    tags:
-      - Communication
-      - Event-Driven
-
-  - term: Correlation Key
-    label: Correlation Key
-    definition: A value used to match a published message to a specific waiting process instance's message subscription.
-    tags:
-      - Messaging
-      - Correlation
-
-  - term: Signal
-    label: Signal
-    definition: A broadcast event not correlated to a specific process instance — all processes with matching signal subscriptions receive it.
-    tags:
-      - Communication
-      - Event-Driven
-
-  - term: Incident
-    label: Incident
-    definition: An error state requiring human intervention, raised when a job exhausts its retries or an unhandled exception occurs.
-    tags:
-      - Error Handling
-      - Operations
-
-  - term: Deployment
-    label: Deployment
-    definition: The act of uploading BPMN, DMN, or form resources to the Zeebe engine, creating versioned process/decision definitions.
-    tags:
-      - Lifecycle
-      - Operations
-
-  - term: User Task
-    label: User Task
-    definition: A BPMN task requiring human action. Zeebe manages assignment and completion through the REST API or task list applications.
-    tags:
-      - Human Workflow
-      - Task Management
-
-  - term: DMN
-    label: Decision Model and Notation
-    definition: An OMG standard for modeling decisions. Zeebe supports deploying DMN decision tables alongside BPMN processes.
-    tags:
-      - Standard
-      - Decision Automation
-
-  - term: Topology
-    label: Cluster Topology
-    definition: The current configuration of the Zeebe cluster including broker nodes, partitions, replication factor, and health status.
-    tags:
-      - Operations
-      - Infrastructure
-
-  - term: Partition
-    label: Partition
-    definition: A unit of horizontal scaling in Zeebe. Each partition has a leader and optional followers. Process instances are assigned to partitions.
-    tags:
-      - Infrastructure
-      - Scalability
-
-  - term: Broker
-    label: Broker
-    definition: A Zeebe cluster node responsible for executing process instances on its assigned partitions.
-    tags:
-      - Infrastructure
-      - Cluster
-
-  - term: Gateway
-    label: Zeebe Gateway
-    definition: The entry point for client API calls. Routes requests to the appropriate broker partition leader.
-    tags:
-      - Infrastructure
-      - API
-
-  - term: Tenant
-    label: Tenant
-    definition: A logical isolation unit in multi-tenant Zeebe deployments. Resources and instances are scoped to a tenant.
-    tags:
-      - Multi-Tenancy
-      - Security
-
-  - term: Variable
-    label: Process Variable
-    definition: Key-value data attached to a process instance or element scope. Passed to job workers and updated by tasks.
-    tags:
-      - Data Model
-      - Runtime
-
-  - term: Retry
-    label: Job Retry
-    definition: The count of remaining attempts to process a job before an incident is raised. Set on job creation and decremented on failure.
-    tags:
-      - Resilience
-      - Error Handling
-
-  - term: Time To Live
-    label: Message Time To Live
-    definition: Duration in milliseconds that a published message is retained in the broker waiting for a process to subscribe to it.
-    tags:
-      - Messaging
-      - Lifecycle
-
-  - term: Migration
-    label: Process Instance Migration
-    definition: The operation of moving a running process instance from one process definition version to another while preserving its state.
-    tags:
-      - Lifecycle
-      - Operations
-
-  - term: Custom Header
-    label: Custom Header
-    definition: Static key-value metadata defined on a service task in BPMN that is passed to the job worker alongside the job.
-    tags:
-      - Data Model
-      - Configuration
+vocabulary: 1.0.0
+info:
+  provider: Zeebe
+  description: Vocabulary for Zeebe APIs.
+  created: '2026-05-03'
+  modified: '2026-05-03'
+operational:
+  apis:
+    - name: Zeebe REST API
+      namespace: zeebe-rest-api
+      version: 8.6.0
+      baseUrl: '{baseUrl}/v2'
+      status: active
+  resources:
+    - name: topology
+      methods:
+        - get
+    - name: deployments
+      methods:
+        - post
+    - name: process-instances
+      methods:
+        - delete
+        - post
+    - name: jobs
+      methods:
+        - patch
+        - post
+    - name: messages
+      methods:
+        - post
+    - name: signals
+      methods:
+        - post
+    - name: incidents
+      methods:
+        - post
+    - name: resources
+      methods:
+        - post
+    - name: user-tasks
+      methods:
+        - post
+  actions:
+    - verb: get
+      methods:
+        - GET
+    - verb: deploy
+      methods:
+        - POST
+    - verb: create
+      methods:
+        - POST
+    - verb: cancel
+      methods:
+        - DELETE
+    - verb: migrate
+      methods:
+        - POST
+    - verb: activate
+      methods:
+        - POST
+    - verb: complete
+      methods:
+        - POST
+    - verb: fail
+      methods:
+        - POST
+    - verb: throw
+      methods:
+        - POST
+    - verb: update
+      methods:
+        - PATCH
+    - verb: publish
+      methods:
+        - POST
+    - verb: broadcast
+      methods:
+        - POST
+    - verb: resolve
+      methods:
+        - POST
+    - verb: delete
+      methods:
+        - POST
+    - verb: assign
+      methods:
+        - POST
+  schemas:
+    core:
+      - ActivateJobsRequest
+      - CreateProcessInstanceRequest
+      - DeploymentResponse
+      - Job
+      - ProcessInstance
+      - PublishMessageRequest
+      - TopologyResponse
+capability:
+  workflows:
+    - name: Zeebe Workflow
+      file: capabilities/zeebe-workflow.yaml
+      description: Unified workflow for Zeebe
+      apis:
+        - zeebe-rest-api
+  personas:
+    - id: developer
+      name: Developer
+      description: Integrates with Zeebe APIs
