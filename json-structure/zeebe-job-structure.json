@@ -1,0 +1,85 @@
+{
+  "title": "Zeebe Job Structure",
+  "description": "JSON structure documentation for the Zeebe Job resource activated from service tasks",
+  "type": "object",
+  "fields": [
+    {
+      "name": "jobKey",
+      "type": "integer (int64)",
+      "required": true,
+      "description": "Unique auto-generated key identifying this job"
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "required": true,
+      "description": "Job type string matching worker subscriptions (e.g., 'payment-service')"
+    },
+    {
+      "name": "processInstanceKey",
+      "type": "integer (int64)",
+      "required": true,
+      "description": "Key of the process instance that created this job"
+    },
+    {
+      "name": "processDefinitionKey",
+      "type": "integer (int64)",
+      "required": false,
+      "description": "Key of the process definition"
+    },
+    {
+      "name": "bpmnProcessId",
+      "type": "string",
+      "required": false,
+      "description": "BPMN process ID of the owning process"
+    },
+    {
+      "name": "elementId",
+      "type": "string",
+      "required": false,
+      "description": "ID of the service task element in the BPMN that created this job"
+    },
+    {
+      "name": "elementInstanceKey",
+      "type": "integer (int64)",
+      "required": false,
+      "description": "Key of the specific service task instance"
+    },
+    {
+      "name": "customHeaders",
+      "type": "object",
+      "required": false,
+      "description": "Key-value headers defined on the service task in BPMN"
+    },
+    {
+      "name": "worker",
+      "type": "string",
+      "required": false,
+      "description": "Worker name that activated and locked this job"
+    },
+    {
+      "name": "retries",
+      "type": "integer",
+      "required": true,
+      "description": "Remaining retry count before an incident is raised"
+    },
+    {
+      "name": "deadline",
+      "type": "integer (int64)",
+      "required": false,
+      "description": "Unix epoch milliseconds when the job lock expires and can be reactivated"
+    },
+    {
+      "name": "variables",
+      "type": "object",
+      "required": false,
+      "description": "Subset of process variables fetched according to fetchVariable list"
+    },
+    {
+      "name": "tenantId",
+      "type": "string",
+      "required": false,
+      "description": "Tenant ID for multi-tenant deployments"
+    }
+  ]
+}

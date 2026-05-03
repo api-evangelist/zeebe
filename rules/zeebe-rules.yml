@@ -1,0 +1,87 @@
+extends: ["spectral:oas"]
+
+rules:
+  # Zeebe uses int64 keys for all resource identifiers
+  zeebe-key-type-int64:
+    description: Zeebe resource keys must use type integer with format int64
+    message: "Key field '{{property}}' must be type integer with format int64"
+    severity: error
+    given: "$.components.schemas..[?(@property === 'Key' || @property.match(/Key$/))]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type:
+              const: integer
+            format:
+              const: int64
+
+  # Zeebe REST paths must have /v2 prefix (handled by server base URL)
+  zeebe-operation-ids-camel-case:
+    description: Zeebe operationIds must use camelCase
+    message: "operationId '{{value}}' must be camelCase"
+    severity: warn
+    given: "$.paths.*.*.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  # All Zeebe action paths use noun-based sub-resources
+  zeebe-action-path-pattern:
+    description: Zeebe action endpoints should use /noun/action pattern (e.g., /jobs/{key}/completion)
+    message: "Consider using noun/action pattern for Zeebe action endpoints"
+    severity: info
+    given: "$.paths"
+    then:
+      function: truthy
+
+  # Zeebe responses use 204 for mutations (non-data-returning)
+  zeebe-mutation-response-204:
+    description: Zeebe mutation operations that return no body should use 204
+    message: "Mutation operation should return 204 for no-body responses"
+    severity: warn
+    given: "$.paths.*.post[responses]"
+    then:
+      function: truthy
+
+  # All paths must have operationId
+  zeebe-operation-id-required:
+    description: All Zeebe operations must have an operationId
+    message: "Operation must have an operationId"
+    severity: error
+    given: "$.paths.*.*"
+    then:
+      field: operationId
+      function: truthy
+
+  # Tags must be defined for all operations
+  zeebe-operation-tags-required:
+    description: All Zeebe operations must have at least one tag
+    message: "Operation must have at least one tag"
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: tags
+      function: truthy
+
+  # Zeebe uses tenantId for multi-tenancy
+  zeebe-multi-tenant-support:
+    description: Zeebe multi-tenant operations should document tenantId
+    message: "Consider documenting tenantId for multi-tenant support"
+    severity: info
+    given: "$.components.schemas..*[?(@property === 'tenantId')]"
+    then:
+      function: truthy
+
+  # Bearer auth must be used
+  zeebe-bearer-auth-required:
+    description: Zeebe API requires Bearer authentication
+    message: "BearerAuth security scheme must be defined"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: BearerAuth
+      function: truthy

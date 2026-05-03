@@ -1,0 +1,46 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v2/jobs/activation",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "type": "payment-service",
+      "timeout": 300000,
+      "maxJobsToActivate": 10,
+      "worker": "payment-worker-1",
+      "fetchVariable": ["orderId", "amount", "customerId"],
+      "tenantIds": ["my-tenant"]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "jobs": [
+        {
+          "jobKey": 2251799813685310,
+          "type": "payment-service",
+          "processInstanceKey": 2251799813685295,
+          "processDefinitionKey": 2251799813685249,
+          "bpmnProcessId": "order-process",
+          "elementId": "payment-task",
+          "elementInstanceKey": 2251799813685305,
+          "customHeaders": {
+            "resultVariable": "paymentResult"
+          },
+          "worker": "payment-worker-1",
+          "retries": 3,
+          "deadline": 1717430400000,
+          "variables": {
+            "orderId": "ORD-12345",
+            "amount": 99.99,
+            "customerId": "CUST-001"
+          },
+          "tenantId": "my-tenant"
+        }
+      ]
+    }
+  }
+}

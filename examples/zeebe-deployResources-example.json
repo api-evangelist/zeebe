@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v2/deployments",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Content-Type": "multipart/form-data"
+    },
+    "body": {
+      "resources": ["<binary BPMN file content>"],
+      "tenantId": "my-tenant"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "deploymentKey": 2251799813685281,
+      "deployments": [
+        {
+          "process": {
+            "bpmnProcessId": "order-process",
+            "version": 1,
+            "processDefinitionKey": 2251799813685249,
+            "resourceName": "order-process.bpmn",
+            "tenantId": "my-tenant"
+          }
+        }
+      ],
+      "tenantId": "my-tenant"
+    }
+  }
+}

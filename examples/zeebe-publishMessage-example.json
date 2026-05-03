@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v2/messages/publication",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "payment-received",
+      "correlationKey": "ORD-12345",
+      "timeToLive": 60000,
+      "messageId": "msg-payment-12345",
+      "variables": {
+        "paymentReference": "PAY-9876",
+        "paymentStatus": "SUCCESS"
+      },
+      "tenantId": "my-tenant"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "messageKey": 2251799813685350,
+      "tenantId": "my-tenant"
+    }
+  }
+}

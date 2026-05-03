@@ -1,0 +1,37 @@
+{
+  "title": "Zeebe Process Instance Structure",
+  "description": "JSON structure documentation for the Zeebe ProcessInstance resource",
+  "type": "object",
+  "fields": [
+    {
+      "name": "processInstanceKey",
+      "type": "integer (int64)",
+      "required": true,
+      "description": "Unique auto-generated key identifying this process instance"
+    },
+    {
+      "name": "processDefinitionKey",
+      "type": "integer (int64)",
+      "required": true,
+      "description": "Key of the deployed process definition being executed"
+    },
+    {
+      "name": "bpmnProcessId",
+      "type": "string",
+      "required": true,
+      "description": "The BPMN process ID as declared in the process XML (e.g., 'order-process')"
+    },
+    {
+      "name": "version",
+      "type": "integer",
+      "required": false,
+      "description": "Version number of the process definition (defaults to latest)"
+    },
+    {
+      "name": "tenantId",
+      "type": "string",
+      "required": false,
+      "description": "Tenant ID for multi-tenant Camunda deployments"
+    }
+  ]
+}
