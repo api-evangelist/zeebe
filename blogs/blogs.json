@@ -1,0 +1,13 @@
+{
+  "repo": "zeebe",
+  "feeds": [
+    {
+      "source": "https://camunda.com/blog/",
+      "feed_url": "https://camunda.com/feed/",
+      "saved": 10,
+      "title": "Camunda"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:38:32Z"
+}
