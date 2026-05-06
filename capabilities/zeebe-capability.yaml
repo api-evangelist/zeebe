@@ -1,0 +1,658 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Zeebe REST API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8,
+    including process deployment, instance management, job handling, and cluster topology queries.
+  tags:
+  - Zeebe
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: zeebe
+    baseUri: http://localhost:8080/v2
+    description: Zeebe REST API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{ZEEBE_TOKEN}}'
+    resources:
+    - name: topology
+      path: /topology
+      operations:
+      - name: gettopology
+        method: GET
+        description: Zeebe Get Cluster Topology
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployments
+      path: /deployments
+      operations:
+      - name: deployresources
+        method: POST
+        description: Zeebe Deploy Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-instances
+      path: /process-instances
+      operations:
+      - name: createprocessinstance
+        method: POST
+        description: Zeebe Create a Process Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-instances-processinstancekey
+      path: /process-instances/{processInstanceKey}
+      operations:
+      - name: cancelprocessinstance
+        method: DELETE
+        description: Zeebe Cancel a Process Instance
+        inputParameters:
+        - name: processInstanceKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-instances-processinstancekey-migration
+      path: /process-instances/{processInstanceKey}/migration
+      operations:
+      - name: migrateprocessinstance
+        method: POST
+        description: Zeebe Migrate a Process Instance
+        inputParameters:
+        - name: processInstanceKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-activation
+      path: /jobs/activation
+      operations:
+      - name: activatejobs
+        method: POST
+        description: Zeebe Activate Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-completion
+      path: /jobs/{jobKey}/completion
+      operations:
+      - name: completejob
+        method: POST
+        description: Zeebe Complete a Job
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-failure
+      path: /jobs/{jobKey}/failure
+      operations:
+      - name: failjob
+        method: POST
+        description: Zeebe Fail a Job
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-error
+      path: /jobs/{jobKey}/error
+      operations:
+      - name: throwerror
+        method: POST
+        description: Zeebe Throw Error for a Job
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-retries
+      path: /jobs/{jobKey}/retries
+      operations:
+      - name: updatejobretries
+        method: PATCH
+        description: Zeebe Update Job Retries
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: messages-publication
+      path: /messages/publication
+      operations:
+      - name: publishmessage
+        method: POST
+        description: Zeebe Publish a Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: signals-broadcast
+      path: /signals/broadcast
+      operations:
+      - name: broadcastsignal
+        method: POST
+        description: Zeebe Broadcast a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentkey-resolution
+      path: /incidents/{incidentKey}/resolution
+      operations:
+      - name: resolveincident
+        method: POST
+        description: Zeebe Resolve an Incident
+        inputParameters:
+        - name: incidentKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources-deletion
+      path: /resources/deletion
+      operations:
+      - name: deleteresource
+        method: POST
+        description: Zeebe Delete a Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-tasks-usertaskkey-assignment
+      path: /user-tasks/{userTaskKey}/assignment
+      operations:
+      - name: assignusertask
+        method: POST
+        description: Zeebe Assign a User Task
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-tasks-usertaskkey-completion
+      path: /user-tasks/{userTaskKey}/completion
+      operations:
+      - name: completeusertask
+        method: POST
+        description: Zeebe Complete a User Task
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: zeebe-rest
+    description: REST adapter for Zeebe REST API.
+    resources:
+    - path: /topology
+      name: gettopology
+      operations:
+      - method: GET
+        name: gettopology
+        description: Zeebe Get Cluster Topology
+        call: zeebe.gettopology
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /deployments
+      name: deployresources
+      operations:
+      - method: POST
+        name: deployresources
+        description: Zeebe Deploy Resources
+        call: zeebe.deployresources
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances
+      name: createprocessinstance
+      operations:
+      - method: POST
+        name: createprocessinstance
+        description: Zeebe Create a Process Instance
+        call: zeebe.createprocessinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances/{processInstanceKey}
+      name: cancelprocessinstance
+      operations:
+      - method: DELETE
+        name: cancelprocessinstance
+        description: Zeebe Cancel a Process Instance
+        call: zeebe.cancelprocessinstance
+        with:
+          processInstanceKey: rest.processInstanceKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances/{processInstanceKey}/migration
+      name: migrateprocessinstance
+      operations:
+      - method: POST
+        name: migrateprocessinstance
+        description: Zeebe Migrate a Process Instance
+        call: zeebe.migrateprocessinstance
+        with:
+          processInstanceKey: rest.processInstanceKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/activation
+      name: activatejobs
+      operations:
+      - method: POST
+        name: activatejobs
+        description: Zeebe Activate Jobs
+        call: zeebe.activatejobs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/completion
+      name: completejob
+      operations:
+      - method: POST
+        name: completejob
+        description: Zeebe Complete a Job
+        call: zeebe.completejob
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/failure
+      name: failjob
+      operations:
+      - method: POST
+        name: failjob
+        description: Zeebe Fail a Job
+        call: zeebe.failjob
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/error
+      name: throwerror
+      operations:
+      - method: POST
+        name: throwerror
+        description: Zeebe Throw Error for a Job
+        call: zeebe.throwerror
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/retries
+      name: updatejobretries
+      operations:
+      - method: PATCH
+        name: updatejobretries
+        description: Zeebe Update Job Retries
+        call: zeebe.updatejobretries
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /messages/publication
+      name: publishmessage
+      operations:
+      - method: POST
+        name: publishmessage
+        description: Zeebe Publish a Message
+        call: zeebe.publishmessage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /signals/broadcast
+      name: broadcastsignal
+      operations:
+      - method: POST
+        name: broadcastsignal
+        description: Zeebe Broadcast a Signal
+        call: zeebe.broadcastsignal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /incidents/{incidentKey}/resolution
+      name: resolveincident
+      operations:
+      - method: POST
+        name: resolveincident
+        description: Zeebe Resolve an Incident
+        call: zeebe.resolveincident
+        with:
+          incidentKey: rest.incidentKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /resources/deletion
+      name: deleteresource
+      operations:
+      - method: POST
+        name: deleteresource
+        description: Zeebe Delete a Resource
+        call: zeebe.deleteresource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user-tasks/{userTaskKey}/assignment
+      name: assignusertask
+      operations:
+      - method: POST
+        name: assignusertask
+        description: Zeebe Assign a User Task
+        call: zeebe.assignusertask
+        with:
+          userTaskKey: rest.userTaskKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user-tasks/{userTaskKey}/completion
+      name: completeusertask
+      operations:
+      - method: POST
+        name: completeusertask
+        description: Zeebe Complete a User Task
+        call: zeebe.completeusertask
+        with:
+          userTaskKey: rest.userTaskKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: zeebe-mcp
+    transport: http
+    description: MCP adapter for Zeebe REST API for AI agent use.
+    tools:
+    - name: gettopology
+      description: Zeebe Get Cluster Topology
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: zeebe.gettopology
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deployresources
+      description: Zeebe Deploy Resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.deployresources
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createprocessinstance
+      description: Zeebe Create a Process Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.createprocessinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancelprocessinstance
+      description: Zeebe Cancel a Process Instance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: zeebe.cancelprocessinstance
+      with:
+        processInstanceKey: tools.processInstanceKey
+      inputParameters:
+      - name: processInstanceKey
+        type: integer
+        description: processInstanceKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrateprocessinstance
+      description: Zeebe Migrate a Process Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.migrateprocessinstance
+      with:
+        processInstanceKey: tools.processInstanceKey
+      inputParameters:
+      - name: processInstanceKey
+        type: integer
+        description: processInstanceKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activatejobs
+      description: Zeebe Activate Jobs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.activatejobs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: completejob
+      description: Zeebe Complete a Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.completejob
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: failjob
+      description: Zeebe Fail a Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.failjob
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: throwerror
+      description: Zeebe Throw Error for a Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.throwerror
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatejobretries
+      description: Zeebe Update Job Retries
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.updatejobretries
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publishmessage
+      description: Zeebe Publish a Message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.publishmessage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: broadcastsignal
+      description: Zeebe Broadcast a Signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.broadcastsignal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resolveincident
+      description: Zeebe Resolve an Incident
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.resolveincident
+      with:
+        incidentKey: tools.incidentKey
+      inputParameters:
+      - name: incidentKey
+        type: integer
+        description: incidentKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteresource
+      description: Zeebe Delete a Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.deleteresource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assignusertask
+      description: Zeebe Assign a User Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.assignusertask
+      with:
+        userTaskKey: tools.userTaskKey
+      inputParameters:
+      - name: userTaskKey
+        type: integer
+        description: userTaskKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: completeusertask
+      description: Zeebe Complete a User Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe.completeusertask
+      with:
+        userTaskKey: tools.userTaskKey
+      inputParameters:
+      - name: userTaskKey
+        type: integer
+        description: userTaskKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    ZEEBE_TOKEN: ZEEBE_TOKEN
