@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://camunda.com/blog/",
-      "feed_url": "https://camunda.com/feed/",
-      "saved": 10,
-      "title": "Camunda"
+      "feed_url": "https://camunda.com/blog/feed/",
+      "title": "Camunda",
+      "saved": 1
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-05-03T23:38:32Z"
+  "post_count": 11,
+  "fetched": "2026-05-09T20:17:51Z"
 }
