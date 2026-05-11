@@ -107,6 +107,33 @@ common:
   - type: Forum
     url: https://forum.camunda.io/
     name: Camunda Forum
+  - type: Integrations
+    url: https://camunda.com/partners/
+integrations:
+  - name: Aaseya
+  - name: apendo
+  - name: BP3
+  - name: Capital BPM
+  - name: Envite Consulting
+  - name: Holisticon AG
+  - name: ilume
+  - name: JIT
+  - name: NTConsult
+  - name: WDW eLab GmbH
+  - name: Capgemini America, Inc.
+  - name: cimt ag
+  - name: Cognizant Technology Solutions
+  - name: GFT Italia S.r.l.
+  - name: HCLTech
+  - name: Horus Sp. z.o.o.
+  - name: Incentro
+  - name: INDUSTRIA
+  - name: Infosys
+  - name: Integrity Vision LLC
+  - name: it-economics GmbH
+  - name: Materna Information & Communications SE
+  - name: NTT Data
+  - name: Osian Infotech Pvt. Ltd.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
