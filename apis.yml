@@ -71,7 +71,7 @@ common:
   - type: Documentation
     url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
     name: Zeebe REST API Documentation
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.camunda.io/docs/guides/
     name: Getting Started with Camunda 8
   - type: GitHub
