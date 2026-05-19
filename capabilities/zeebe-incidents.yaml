@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Zeebe REST API — Incidents
+  description: 'Zeebe REST API — Incidents. 1 operations. Lead operation: Zeebe Resolve an Incident. Self-contained Naftiko
+    capability covering one Zeebe business surface.'
+  tags:
+  - Zeebe
+  - Incidents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ZEEBE_API_KEY: ZEEBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: zeebe-incidents
+    baseUri: ''
+    description: Zeebe REST API — Incidents business capability. Self-contained, no shared references.
+    resources:
+    - name: incidents-incidentKey-resolution
+      path: /incidents/{incidentKey}/resolution
+      operations:
+      - name: resolveincident
+        method: POST
+        description: Zeebe Resolve an Incident
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: incidentKey
+          in: path
+          type: integer
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ZEEBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: zeebe-incidents-rest
+    port: 8080
+    description: REST adapter for Zeebe REST API — Incidents. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/incidents/{incidentkey}/resolution
+      name: incidents-incidentkey-resolution
+      description: REST surface for incidents-incidentKey-resolution.
+      operations:
+      - method: POST
+        name: resolveincident
+        description: Zeebe Resolve an Incident
+        call: zeebe-incidents.resolveincident
+        with:
+          incidentKey: rest.incidentKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: zeebe-incidents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Zeebe REST API — Incidents. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: zeebe-resolve-incident
+      description: Zeebe Resolve an Incident
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe-incidents.resolveincident
+      with:
+        incidentKey: tools.incidentKey
+      outputParameters:
+      - type: object
+        mapping: $.

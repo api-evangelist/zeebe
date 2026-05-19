@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Zeebe REST API — User Tasks
+  description: 'Zeebe REST API — User Tasks. 2 operations. Lead operation: Zeebe Assign a User Task. Self-contained Naftiko
+    capability covering one Zeebe business surface.'
+  tags:
+  - Zeebe
+  - User Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ZEEBE_API_KEY: ZEEBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: zeebe-user-tasks
+    baseUri: ''
+    description: Zeebe REST API — User Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: user-tasks-userTaskKey-assignment
+      path: /user-tasks/{userTaskKey}/assignment
+      operations:
+      - name: assignusertask
+        method: POST
+        description: Zeebe Assign a User Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user-tasks-userTaskKey-completion
+      path: /user-tasks/{userTaskKey}/completion
+      operations:
+      - name: completeusertask
+        method: POST
+        description: Zeebe Complete a User Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.ZEEBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: zeebe-user-tasks-rest
+    port: 8080
+    description: REST adapter for Zeebe REST API — User Tasks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/user-tasks/{usertaskkey}/assignment
+      name: user-tasks-usertaskkey-assignment
+      description: REST surface for user-tasks-userTaskKey-assignment.
+      operations:
+      - method: POST
+        name: assignusertask
+        description: Zeebe Assign a User Task
+        call: zeebe-user-tasks.assignusertask
+        with:
+          userTaskKey: rest.userTaskKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-tasks/{usertaskkey}/completion
+      name: user-tasks-usertaskkey-completion
+      description: REST surface for user-tasks-userTaskKey-completion.
+      operations:
+      - method: POST
+        name: completeusertask
+        description: Zeebe Complete a User Task
+        call: zeebe-user-tasks.completeusertask
+        with:
+          userTaskKey: rest.userTaskKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: zeebe-user-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Zeebe REST API — User Tasks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: zeebe-assign-user-task
+      description: Zeebe Assign a User Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe-user-tasks.assignusertask
+      with:
+        userTaskKey: tools.userTaskKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: zeebe-complete-user-task
+      description: Zeebe Complete a User Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: zeebe-user-tasks.completeusertask
+      with:
+        userTaskKey: tools.userTaskKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
