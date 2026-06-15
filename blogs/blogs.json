@@ -2,6 +2,13 @@
   "repo": "zeebe",
   "feeds": [
     {
+      "source": "https://camunda.com/blog/",
+      "feed_url": "https://camunda.com/blog/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://camunda.com/blog/feed/",
       "error": "HTTPError"
     },
@@ -13,6 +20,6 @@
       "method": "none"
     }
   ],
-  "post_count": 18,
-  "fetched": "2026-06-01T23:35:02Z"
+  "post_count": 21,
+  "fetched": "2026-06-14T20:42:17Z"
 }

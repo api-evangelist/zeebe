@@ -1,0 +1,390 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Get Cluster Topology",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/topology"
+          },
+          "docs": "Returns the current topology of the Zeebe cluster including brokers and partitions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Deploy Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/deployments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "resources",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "tenantId",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deploys one or more BPMN process definitions, DMN decisions, or forms to Zeebe."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Process Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Create a Process Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and starts a new process instance in Zeebe."
+        },
+        {
+          "info": {
+            "name": "Zeebe Cancel a Process Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "100",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a running process instance."
+        },
+        {
+          "info": {
+            "name": "Zeebe Migrate a Process Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey/migration",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrates a process instance to a new process definition version."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Activate Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/activation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates jobs of a given type for processing by a worker."
+        },
+        {
+          "info": {
+            "name": "Zeebe Complete a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/completion",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a job with the given payload."
+        },
+        {
+          "info": {
+            "name": "Zeebe Fail a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/failure",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reports a job failure to trigger retry or incident."
+        },
+        {
+          "info": {
+            "name": "Zeebe Throw Error for a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/error",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Throws a BPMN error for a job to trigger error boundary events."
+        },
+        {
+          "info": {
+            "name": "Zeebe Update Job Retries",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{baseUrl}/v2/jobs/:jobKey/retries",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the number of retries for a job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Publish a Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/messages/publication",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes a message for correlation with waiting subscriptions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Broadcast a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/signals/broadcast",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Broadcasts a signal to all matching signal subscriptions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Resolve an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/incidents/:incidentKey/resolution",
+            "params": [
+              {
+                "name": "incidentKey",
+                "value": "100",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resolves an incident to retry the failed operation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Delete a Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/resources/deletion",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a deployed resource (process, decision, or form)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Assign a User Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/assignment",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a user task to a specific user."
+        },
+        {
+          "info": {
+            "name": "Zeebe Complete a User Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/completion",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a user task with optional variables."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
