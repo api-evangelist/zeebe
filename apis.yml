@@ -6,7 +6,7 @@ description: >-
   It implements BPMN 2.0 process execution and provides a REST API for process deployment, instance management, job
   handling, message correlation, and cluster topology queries.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - BPMN
   - Camunda
