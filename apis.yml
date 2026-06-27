@@ -43,7 +43,7 @@ apis:
         url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
       - type: Postman
         url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
-      - type: Spectral Rules
+      - type: SpectralRules
         url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
       - type: Examples
         url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
@@ -88,19 +88,19 @@ common:
   - type: Issues
     url: https://github.com/camunda/camunda/issues
     name: GitHub Issues
-  - type: SDK
+  - type: SDKs
     url: https://github.com/camunda/camunda-bpm-spring-boot-starter
     name: Spring Boot Starter
-  - type: SDK
+  - type: SDKs
     url: https://github.com/camunda-community-hub/zeebe-client-csharp
     name: C# Client
-  - type: SDK
+  - type: SDKs
     url: https://github.com/camunda-community-hub/micronaut-zeebe-client
     name: Micronaut Client
   - type: ChangeLog
     url: https://github.com/camunda/camunda/releases
     name: Release Notes
-  - type: Forum
+  - type: Forums
     url: https://forum.camunda.io/
     name: Camunda Forum
   - type: Integrations

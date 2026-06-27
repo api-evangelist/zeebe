@@ -2,15 +2,11 @@
   "repo": "zeebe",
   "feeds": [
     {
-      "source": "https://camunda.com/blog/",
-      "feed_url": "https://camunda.com/blog/",
+      "source": "https://camunda.com/feed/",
+      "feed_url": "https://camunda.com/feed/",
       "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://camunda.com/blog/feed/",
-      "error": "HTTPError"
+      "saved": 5,
+      "method": "feed"
     },
     {
       "source": "https://camunda.com/pricing/",
@@ -20,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 21,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 28,
+  "fetched": "2026-06-27T12:03:07Z"
 }
