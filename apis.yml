@@ -58,6 +58,14 @@ apis:
       - type: Capabilities
         url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
 common:
+  - type: TrustCenter
+    url: security/zeebe-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/zeebe-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/zeebe-domain-security.yml
+  - type: Authentication
+    url: authentication/zeebe-authentication.yml
   - type: Website
     url: https://camunda.com/platform/zeebe/
     name: Zeebe Platform Page

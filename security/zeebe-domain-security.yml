@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: camunda.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 17 19:15:04 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: docs.camunda.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  8 05:27:52 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: camunda.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: camunda.io
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
