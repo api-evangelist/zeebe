@@ -58,6 +58,8 @@ apis:
       - type: Capabilities
         url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
 common:
+  - type: AgenticAccess
+    url: agentic-access/zeebe-agentic-access.yml
   - type: TrustCenter
     url: security/zeebe-trust-center.yml
   - type: VulnerabilityDisclosure
