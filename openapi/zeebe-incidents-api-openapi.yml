@@ -1,0 +1,48 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster Incidents API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Incidents
+paths:
+  /incidents/{incidentKey}/resolution:
+    post:
+      operationId: resolveIncident
+      summary: Zeebe Resolve an Incident
+      description: Resolves an incident to retry the failed operation.
+      tags:
+      - Incidents
+      parameters:
+      - name: incidentKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      responses:
+        '204':
+          description: Incident resolved
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

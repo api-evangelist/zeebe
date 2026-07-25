@@ -1,0 +1,58 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster Resources API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Resources
+paths:
+  /resources/deletion:
+    post:
+      operationId: deleteResource
+      summary: Zeebe Delete a Resource
+      description: Deletes a deployed resource (process, decision, or form).
+      tags:
+      - Resources
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resourceKey
+              properties:
+                resourceKey:
+                  type: integer
+                  format: int64
+            examples:
+              DeleteResourceRequestExample:
+                summary: Default deleteResource request
+                x-microcks-default: true
+                value:
+                  resourceKey: 100
+      responses:
+        '204':
+          description: Resource deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

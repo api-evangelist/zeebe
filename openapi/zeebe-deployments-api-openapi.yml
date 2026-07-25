@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster Deployments API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Deployments
+paths:
+  /deployments:
+    post:
+      operationId: deployResources
+      summary: Zeebe Deploy Resources
+      description: Deploys one or more BPMN process definitions, DMN decisions, or forms to Zeebe.
+      tags:
+      - Deployments
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                resources:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                tenantId:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentResponse'
+              examples:
+                DeployResources200Example:
+                  summary: Default deployResources 200 response
+                  x-microcks-default: true
+                  value:
+                    deploymentKey: 100
+                    deployments:
+                    - {}
+                    tenantId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DeploymentResponse:
+      type: object
+      properties:
+        deploymentKey:
+          type: integer
+          format: int64
+          example: 100
+        deployments:
+          type: array
+          items:
+            type: object
+          example:
+          - {}
+        tenantId:
+          type: string
+          example: '500123'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

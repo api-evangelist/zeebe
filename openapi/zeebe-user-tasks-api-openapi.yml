@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster User Tasks API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: User Tasks
+paths:
+  /user-tasks/{userTaskKey}/assignment:
+    post:
+      operationId: assignUserTask
+      summary: Zeebe Assign a User Task
+      description: Assigns a user task to a specific user.
+      tags:
+      - User Tasks
+      parameters:
+      - name: userTaskKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee:
+                  type: string
+                allowOverride:
+                  type: boolean
+            examples:
+              AssignUserTaskRequestExample:
+                summary: Default assignUserTask request
+                x-microcks-default: true
+                value:
+                  assignee: example-value
+                  allowOverride: true
+      responses:
+        '204':
+          description: Task assigned
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /user-tasks/{userTaskKey}/completion:
+    post:
+      operationId: completeUserTask
+      summary: Zeebe Complete a User Task
+      description: Completes a user task with optional variables.
+      tags:
+      - User Tasks
+      parameters:
+      - name: userTaskKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+            examples:
+              CompleteUserTaskRequestExample:
+                summary: Default completeUserTask request
+                x-microcks-default: true
+                value:
+                  variables: {}
+      responses:
+        '204':
+          description: Task completed
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

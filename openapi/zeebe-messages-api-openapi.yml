@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster Messages API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Messages
+paths:
+  /messages/publication:
+    post:
+      operationId: publishMessage
+      summary: Zeebe Publish a Message
+      description: Publishes a message for correlation with waiting subscriptions.
+      tags:
+      - Messages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageRequest'
+            examples:
+              PublishMessageRequestExample:
+                summary: Default publishMessage request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  correlationKey: example-value
+                  timeToLive: 100
+                  messageId: '500123'
+                  variables: {}
+                  tenantId: '500123'
+      responses:
+        '200':
+          description: Successful response
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PublishMessageRequest:
+      type: object
+      required:
+      - name
+      - correlationKey
+      properties:
+        name:
+          type: string
+          example: Example Name
+        correlationKey:
+          type: string
+          example: example-value
+        timeToLive:
+          type: integer
+          format: int64
+          example: 100
+        messageId:
+          type: string
+          example: '500123'
+        variables:
+          type: object
+          example: {}
+        tenantId:
+          type: string
+          example: '500123'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

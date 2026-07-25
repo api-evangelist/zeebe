@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Cluster
+paths:
+  /topology:
+    get:
+      operationId: getTopology
+      summary: Zeebe Get Cluster Topology
+      description: Returns the current topology of the Zeebe cluster including brokers and partitions.
+      tags:
+      - Cluster
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopologyResponse'
+              examples:
+                GetTopology200Example:
+                  summary: Default getTopology 200 response
+                  x-microcks-default: true
+                  value:
+                    brokers:
+                    - nodeId: 100
+                      host: example-value
+                      port: 100
+                      version: 1.0.0
+                      partitions:
+                      - partitionId: {}
+                        role: {}
+                        health: {}
+                    clusterSize: 100
+                    partitionsCount: 100
+                    replicationFactor: 100
+                    gatewayVersion: 1.0.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TopologyResponse:
+      type: object
+      properties:
+        brokers:
+          type: array
+          items:
+            type: object
+            properties:
+              nodeId:
+                type: integer
+              host:
+                type: string
+              port:
+                type: integer
+              version:
+                type: string
+              partitions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    partitionId:
+                      type: integer
+                    role:
+                      type: string
+                    health:
+                      type: string
+          example:
+          - nodeId: 100
+            host: example-value
+            port: 100
+            version: 1.0.0
+            partitions:
+            - partitionId: {}
+              role: {}
+              health: {}
+        clusterSize:
+          type: integer
+          example: 100
+        partitionsCount:
+          type: integer
+          example: 100
+        replicationFactor:
+          type: integer
+          example: 100
+        gatewayVersion:
+          type: string
+          example: 1.0.0
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

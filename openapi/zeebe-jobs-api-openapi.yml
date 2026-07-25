@@ -1,0 +1,320 @@
+openapi: 3.1.0
+info:
+  title: Zeebe REST Cluster Jobs API
+  description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Zeebe Gateway REST API
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Jobs
+paths:
+  /jobs/activation:
+    post:
+      operationId: activateJobs
+      summary: Zeebe Activate Jobs
+      description: Activates jobs of a given type for processing by a worker.
+      tags:
+      - Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateJobsRequest'
+            examples:
+              ActivateJobsRequestExample:
+                summary: Default activateJobs request
+                x-microcks-default: true
+                value:
+                  type: standard
+                  timeout: 100
+                  maxJobsToActivate: 100
+                  worker: example-value
+                  fetchVariable:
+                  - example-value
+                  tenantIds:
+                  - example-value
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+              examples:
+                ActivateJobs200Example:
+                  summary: Default activateJobs 200 response
+                  x-microcks-default: true
+                  value:
+                    jobs:
+                    - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobKey}/completion:
+    post:
+      operationId: completeJob
+      summary: Zeebe Complete a Job
+      description: Completes a job with the given payload.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+            examples:
+              CompleteJobRequestExample:
+                summary: Default completeJob request
+                x-microcks-default: true
+                value:
+                  variables: {}
+      responses:
+        '204':
+          description: Job completed
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobKey}/failure:
+    post:
+      operationId: failJob
+      summary: Zeebe Fail a Job
+      description: Reports a job failure to trigger retry or incident.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - retries
+              properties:
+                retries:
+                  type: integer
+                errorMessage:
+                  type: string
+                retryBackOff:
+                  type: integer
+                  format: int64
+                variables:
+                  type: object
+            examples:
+              FailJobRequestExample:
+                summary: Default failJob request
+                x-microcks-default: true
+                value:
+                  retries: 100
+                  errorMessage: example-value
+                  retryBackOff: 100
+                  variables: {}
+      responses:
+        '204':
+          description: Job failure reported
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobKey}/error:
+    post:
+      operationId: throwError
+      summary: Zeebe Throw Error for a Job
+      description: Throws a BPMN error for a job to trigger error boundary events.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - errorCode
+              properties:
+                errorCode:
+                  type: string
+                errorMessage:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              ThrowErrorRequestExample:
+                summary: Default throwError request
+                x-microcks-default: true
+                value:
+                  errorCode: example-value
+                  errorMessage: example-value
+                  variables: {}
+      responses:
+        '204':
+          description: Error thrown
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobKey}/retries:
+    patch:
+      operationId: updateJobRetries
+      summary: Zeebe Update Job Retries
+      description: Updates the number of retries for a job.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - retries
+              properties:
+                retries:
+                  type: integer
+            examples:
+              UpdateJobRetriesRequestExample:
+                summary: Default updateJobRetries request
+                x-microcks-default: true
+                value:
+                  retries: 100
+      responses:
+        '204':
+          description: Job retries updated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        jobKey:
+          type: integer
+          format: int64
+          example: 100
+        type:
+          type: string
+          example: standard
+        processInstanceKey:
+          type: integer
+          format: int64
+          example: 100
+        processDefinitionKey:
+          type: integer
+          format: int64
+          example: 100
+        bpmnProcessId:
+          type: string
+          example: '500123'
+        elementId:
+          type: string
+          example: '500123'
+        elementInstanceKey:
+          type: integer
+          format: int64
+          example: 100
+        customHeaders:
+          type: object
+          example: {}
+        worker:
+          type: string
+          example: example-value
+        retries:
+          type: integer
+          example: 100
+        deadline:
+          type: integer
+          format: int64
+          example: 100
+        variables:
+          type: object
+          example: {}
+        tenantId:
+          type: string
+          example: '500123'
+    ActivateJobsRequest:
+      type: object
+      required:
+      - type
+      - timeout
+      - maxJobsToActivate
+      properties:
+        type:
+          type: string
+          example: standard
+        timeout:
+          type: integer
+          format: int64
+          example: 100
+        maxJobsToActivate:
+          type: integer
+          example: 100
+        worker:
+          type: string
+          example: example-value
+        fetchVariable:
+          type: array
+          items:
+            type: string
+          example:
+          - example-value
+        tenantIds:
+          type: array
+          items:
+            type: string
+          example:
+          - example-value
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
