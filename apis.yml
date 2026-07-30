@@ -6,7 +6,20 @@ description: >-
   It implements BPMN 2.0 process execution and provides a REST API for process deployment, instance management, job
   handling, message correlation, and cluster topology queries.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zeebe.png
 tags:
   - BPMN
   - Camunda
@@ -21,43 +34,288 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: zeebe:zeebe
-    name: Zeebe REST API
-    description: >-
-      The Zeebe REST API provides programmatic access to the Zeebe workflow engine powering Camunda 8. It enables
-      process deployment, process instance creation and management, job activation and completion, message and signal
-      publishing, incident resolution, user task management, and cluster topology queries.
-    humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
-    baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
-    tags:
-      - BPMN
-      - Camunda
-      - Cloud Native
-      - Microservices
-      - Process Automation
-      - Workflow Orchestration
-    properties:
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/openapi/zeebe-api.yml
-      - type: Documentation
-        url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
-      - type: Postman
-        url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
-      - type: SpectralRules
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
-      - type: Examples
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
-      - type: JSONStructure
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
-      - type: JSONLD
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
-      - type: Vocabulary
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
-      - type: Capabilities
-        url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-cluster-api
+  name: Zeebe Cluster API
+  description: The Cluster API from Zeebe — 1 operation(s) for cluster.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-deployments-api
+  name: Zeebe Deployments API
+  description: The Deployments API from Zeebe — 1 operation(s) for deployments.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-incidents-api
+  name: Zeebe Incidents API
+  description: The Incidents API from Zeebe — 1 operation(s) for incidents.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Incidents
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-incidents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-jobs-api
+  name: Zeebe Jobs API
+  description: The Jobs API from Zeebe — 5 operation(s) for jobs.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-messages-api
+  name: Zeebe Messages API
+  description: The Messages API from Zeebe — 1 operation(s) for messages.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-process-instances-api
+  name: Zeebe Process Instances API
+  description: The Process Instances API from Zeebe — 3 operation(s) for process instances.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Process Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-process-instances-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-resources-api
+  name: Zeebe Resources API
+  description: The Resources API from Zeebe — 1 operation(s) for resources.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-resources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-signals-api
+  name: Zeebe Signals API
+  description: The Signals API from Zeebe — 1 operation(s) for signals.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - Signals
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-signals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
+- aid: zeebe:zeebe-user-tasks-api
+  name: Zeebe User Tasks API
+  description: The User Tasks API from Zeebe — 2 operation(s) for user tasks.
+  humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
+  tags:
+  - User Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/zeebe-user-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
+  - type: Postman
+    url: https://www.postman.com/camundateam/camunda-8-postman/collection/j0knqwp/zeebe-api-rest
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/rules/zeebe-rules.yml
+  - type: Examples
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/examples/
+  - type: JSONSchema
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-schema/
+  - type: JSONStructure
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-structure/
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/json-ld/zeebe-context.jsonld
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/vocabulary/zeebe-vocabulary.yml
+  - type: Capabilities
+    url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/zeebe/overview
   - type: AgenticAccess
     url: agentic-access/zeebe-agentic-access.yml
   - type: TrustCenter
