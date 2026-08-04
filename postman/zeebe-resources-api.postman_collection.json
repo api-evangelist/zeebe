@@ -1,0 +1,138 @@
+{
+  "info": {
+    "_postman_id": "e46fda84-ac27-47ad-9649-b5bd641cb46b",
+    "name": "Zeebe REST Cluster Resources API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:06.000Z",
+    "updatedAt": "2026-07-28T03:37:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e46fda84-ac27-47ad-9649-b5bd641cb46b"
+  },
+  "item": [
+    {
+      "name": "resources",
+      "item": [
+        {
+          "name": "deletion",
+          "item": [
+            {
+              "name": "Zeebe Delete a Resource",
+              "id": "743d6fb6-ae65-4b1c-9fb2-fc170d2c891e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resourceKey\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources/deletion",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    "deletion"
+                  ]
+                },
+                "description": "Deletes a deployed resource (process, decision, or form)."
+              },
+              "response": [
+                {
+                  "id": "71d0dd6f-3766-4939-b372-3feda6616428",
+                  "name": "Resource deleted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resourceKey\": \"<long>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/deletion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        "deletion"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:37:06.000Z",
+                  "updatedAt": "2026-07-28T03:37:06.000Z",
+                  "uid": "35240-71d0dd6f-3766-4939-b372-3feda6616428"
+                }
+              ],
+              "createdAt": "2026-07-28T03:37:06.000Z",
+              "updatedAt": "2026-07-28T03:37:06.000Z",
+              "uid": "35240-743d6fb6-ae65-4b1c-9fb2-fc170d2c891e"
+            }
+          ],
+          "id": "0f2f181f-08b9-4c7e-bac5-e2ac44f06386",
+          "createdAt": "2026-07-28T03:37:06.000Z",
+          "updatedAt": "2026-07-28T03:37:06.000Z",
+          "uid": "35240-0f2f181f-08b9-4c7e-bac5-e2ac44f06386"
+        }
+      ],
+      "id": "7e9f832c-7158-47d1-9797-7c66d463adc0",
+      "createdAt": "2026-07-28T03:37:06.000Z",
+      "updatedAt": "2026-07-28T03:37:06.000Z",
+      "uid": "35240-7e9f832c-7158-47d1-9797-7c66d463adc0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "info": {
+    "_postman_id": "78db5f75-f119-42d8-a527-54314f76dad7",
+    "name": "Zeebe REST Cluster Signals API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:06.000Z",
+    "updatedAt": "2026-07-28T03:37:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-78db5f75-f119-42d8-a527-54314f76dad7"
+  },
+  "item": [
+    {
+      "name": "signals",
+      "item": [
+        {
+          "name": "broadcast",
+          "item": [
+            {
+              "name": "Zeebe Broadcast a Signal",
+              "id": "6fd2c57d-a128-47e1-9fd7-153a68687fd8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signalName\": \"<string>\",\n  \"variables\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/signals/broadcast",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "signals",
+                    "broadcast"
+                  ]
+                },
+                "description": "Broadcasts a signal to all matching signal subscriptions."
+              },
+              "response": [
+                {
+                  "id": "883874be-37f0-4b63-ab0d-8936d9d9f5df",
+                  "name": "Signal broadcast",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"signalName\": \"<string>\",\n  \"variables\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/signals/broadcast",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "signals",
+                        "broadcast"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:37:07.000Z",
+                  "updatedAt": "2026-07-28T03:37:07.000Z",
+                  "uid": "35240-883874be-37f0-4b63-ab0d-8936d9d9f5df"
+                }
+              ],
+              "createdAt": "2026-07-28T03:37:07.000Z",
+              "updatedAt": "2026-07-28T03:37:07.000Z",
+              "uid": "35240-6fd2c57d-a128-47e1-9fd7-153a68687fd8"
+            }
+          ],
+          "id": "be52e626-5b83-493f-9bc7-da6604ec092c",
+          "createdAt": "2026-07-28T03:37:07.000Z",
+          "updatedAt": "2026-07-28T03:37:07.000Z",
+          "uid": "35240-be52e626-5b83-493f-9bc7-da6604ec092c"
+        }
+      ],
+      "id": "1e4fda73-7992-45a3-a79d-d419b90eafc0",
+      "createdAt": "2026-07-28T03:37:07.000Z",
+      "updatedAt": "2026-07-28T03:37:07.000Z",
+      "uid": "35240-1e4fda73-7992-45a3-a79d-d419b90eafc0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

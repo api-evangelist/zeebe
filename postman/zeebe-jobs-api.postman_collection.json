@@ -1,0 +1,616 @@
+{
+  "info": {
+    "_postman_id": "7dd39668-ecfe-4141-8303-9680dd773356",
+    "name": "Zeebe REST Cluster Jobs API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:03.000Z",
+    "updatedAt": "2026-07-28T03:37:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7dd39668-ecfe-4141-8303-9680dd773356"
+  },
+  "item": [
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "activation",
+          "item": [
+            {
+              "name": "Zeebe Activate Jobs",
+              "id": "ea8c9432-0df2-40bc-85f6-cd15842862be",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"timeout\": \"<long>\",\n  \"maxJobsToActivate\": \"<integer>\",\n  \"worker\": \"<string>\",\n  \"fetchVariable\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tenantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/jobs/activation",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs",
+                    "activation"
+                  ]
+                },
+                "description": "Activates jobs of a given type for processing by a worker."
+              },
+              "response": [
+                {
+                  "id": "0430e377-3c7a-4cae-984c-9ae911e16165",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"timeout\": \"<long>\",\n  \"maxJobsToActivate\": \"<integer>\",\n  \"worker\": \"<string>\",\n  \"fetchVariable\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tenantIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/activation",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        "activation"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobs\": [\n    {\n      \"jobKey\": \"<long>\",\n      \"type\": \"<string>\",\n      \"processInstanceKey\": \"<long>\",\n      \"processDefinitionKey\": \"<long>\",\n      \"bpmnProcessId\": \"<string>\",\n      \"elementId\": \"<string>\",\n      \"elementInstanceKey\": \"<long>\",\n      \"customHeaders\": {},\n      \"worker\": \"<string>\",\n      \"retries\": \"<integer>\",\n      \"deadline\": \"<long>\",\n      \"variables\": {},\n      \"tenantId\": \"<string>\"\n    },\n    {\n      \"jobKey\": \"<long>\",\n      \"type\": \"<string>\",\n      \"processInstanceKey\": \"<long>\",\n      \"processDefinitionKey\": \"<long>\",\n      \"bpmnProcessId\": \"<string>\",\n      \"elementId\": \"<string>\",\n      \"elementInstanceKey\": \"<long>\",\n      \"customHeaders\": {},\n      \"worker\": \"<string>\",\n      \"retries\": \"<integer>\",\n      \"deadline\": \"<long>\",\n      \"variables\": {},\n      \"tenantId\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:37:04.000Z",
+                  "updatedAt": "2026-07-28T03:37:04.000Z",
+                  "uid": "35240-0430e377-3c7a-4cae-984c-9ae911e16165"
+                }
+              ],
+              "createdAt": "2026-07-28T03:37:03.000Z",
+              "updatedAt": "2026-07-28T03:37:03.000Z",
+              "uid": "35240-ea8c9432-0df2-40bc-85f6-cd15842862be"
+            }
+          ],
+          "id": "509fc550-6721-43e6-960c-32e544bb34f2",
+          "createdAt": "2026-07-28T03:37:03.000Z",
+          "updatedAt": "2026-07-28T03:37:03.000Z",
+          "uid": "35240-509fc550-6721-43e6-960c-32e544bb34f2"
+        },
+        {
+          "name": "{jobKey}",
+          "item": [
+            {
+              "name": "completion",
+              "item": [
+                {
+                  "name": "Zeebe Complete a Job",
+                  "id": "8e47510c-e73b-411e-b2dd-62c8a1995f3d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"variables\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobKey/completion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobKey",
+                        "completion"
+                      ],
+                      "variable": [
+                        {
+                          "id": "88da8c93-0426-406d-9545-581b42a528cc",
+                          "key": "jobKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Completes a job with the given payload."
+                  },
+                  "response": [
+                    {
+                      "id": "3c26c0d1-6ad2-4457-b5d2-e3ec48b3a695",
+                      "name": "Job completed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"variables\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobKey/completion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobKey",
+                            "completion"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:04.000Z",
+                      "updatedAt": "2026-07-28T03:37:04.000Z",
+                      "uid": "35240-3c26c0d1-6ad2-4457-b5d2-e3ec48b3a695"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:03.000Z",
+                  "updatedAt": "2026-07-28T03:37:03.000Z",
+                  "uid": "35240-8e47510c-e73b-411e-b2dd-62c8a1995f3d"
+                }
+              ],
+              "id": "489a40b0-82d0-453c-9a2a-8328f956f3df",
+              "createdAt": "2026-07-28T03:37:03.000Z",
+              "updatedAt": "2026-07-28T03:37:03.000Z",
+              "uid": "35240-489a40b0-82d0-453c-9a2a-8328f956f3df"
+            },
+            {
+              "name": "failure",
+              "item": [
+                {
+                  "name": "Zeebe Fail a Job",
+                  "id": "032f552c-88ab-432a-ba33-9500cdf2b489",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"retries\": \"<integer>\",\n  \"errorMessage\": \"<string>\",\n  \"retryBackOff\": \"<long>\",\n  \"variables\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobKey/failure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobKey",
+                        "failure"
+                      ],
+                      "variable": [
+                        {
+                          "id": "aab9cfde-bef2-425b-b20b-f86c7fa56a3d",
+                          "key": "jobKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Reports a job failure to trigger retry or incident."
+                  },
+                  "response": [
+                    {
+                      "id": "ea89da18-2ff4-4479-bc53-2bd8057e642b",
+                      "name": "Job failure reported",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"retries\": \"<integer>\",\n  \"errorMessage\": \"<string>\",\n  \"retryBackOff\": \"<long>\",\n  \"variables\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobKey/failure",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobKey",
+                            "failure"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:04.000Z",
+                      "updatedAt": "2026-07-28T03:37:04.000Z",
+                      "uid": "35240-ea89da18-2ff4-4479-bc53-2bd8057e642b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:03.000Z",
+                  "updatedAt": "2026-07-28T03:37:03.000Z",
+                  "uid": "35240-032f552c-88ab-432a-ba33-9500cdf2b489"
+                }
+              ],
+              "id": "aaa1c579-31e5-4709-a042-764c348dc2df",
+              "createdAt": "2026-07-28T03:37:03.000Z",
+              "updatedAt": "2026-07-28T03:37:03.000Z",
+              "uid": "35240-aaa1c579-31e5-4709-a042-764c348dc2df"
+            },
+            {
+              "name": "error",
+              "item": [
+                {
+                  "name": "Zeebe Throw Error for a Job",
+                  "id": "f094fa7f-0db9-4d63-82b1-a49efb9ed15b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"variables\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobKey/error",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobKey",
+                        "error"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4e7aa42d-f909-4f16-93c0-333c220d69ca",
+                          "key": "jobKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Throws a BPMN error for a job to trigger error boundary events."
+                  },
+                  "response": [
+                    {
+                      "id": "b273bc8a-12a2-44af-9af5-8ffd686a5f59",
+                      "name": "Error thrown",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\",\n  \"variables\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobKey/error",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobKey",
+                            "error"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:04.000Z",
+                      "updatedAt": "2026-07-28T03:37:04.000Z",
+                      "uid": "35240-b273bc8a-12a2-44af-9af5-8ffd686a5f59"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:03.000Z",
+                  "updatedAt": "2026-07-28T03:37:03.000Z",
+                  "uid": "35240-f094fa7f-0db9-4d63-82b1-a49efb9ed15b"
+                }
+              ],
+              "id": "7e163209-03b1-49c0-87a5-6a00fb9939bd",
+              "createdAt": "2026-07-28T03:37:03.000Z",
+              "updatedAt": "2026-07-28T03:37:03.000Z",
+              "uid": "35240-7e163209-03b1-49c0-87a5-6a00fb9939bd"
+            },
+            {
+              "name": "retries",
+              "item": [
+                {
+                  "name": "Zeebe Update Job Retries",
+                  "id": "df23314e-7be8-4c37-a22b-50a2953606fc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"retries\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobKey/retries",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobKey",
+                        "retries"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9a198ef5-4aa8-48b7-a28c-05d2e4a700a6",
+                          "key": "jobKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates the number of retries for a job."
+                  },
+                  "response": [
+                    {
+                      "id": "a36aefba-1b8a-49ae-ae1e-9e5fcc938098",
+                      "name": "Job retries updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"retries\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobKey/retries",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobKey",
+                            "retries"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:04.000Z",
+                      "updatedAt": "2026-07-28T03:37:04.000Z",
+                      "uid": "35240-a36aefba-1b8a-49ae-ae1e-9e5fcc938098"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:03.000Z",
+                  "updatedAt": "2026-07-28T03:37:03.000Z",
+                  "uid": "35240-df23314e-7be8-4c37-a22b-50a2953606fc"
+                }
+              ],
+              "id": "da8e7cd6-87da-49b5-acfb-4e816b992edb",
+              "createdAt": "2026-07-28T03:37:03.000Z",
+              "updatedAt": "2026-07-28T03:37:03.000Z",
+              "uid": "35240-da8e7cd6-87da-49b5-acfb-4e816b992edb"
+            }
+          ],
+          "id": "f9de6602-810a-4097-83ea-aa144227e280",
+          "createdAt": "2026-07-28T03:37:03.000Z",
+          "updatedAt": "2026-07-28T03:37:03.000Z",
+          "uid": "35240-f9de6602-810a-4097-83ea-aa144227e280"
+        }
+      ],
+      "id": "b2588b05-1773-4b06-a5a6-6730b5b4c8c3",
+      "createdAt": "2026-07-28T03:37:03.000Z",
+      "updatedAt": "2026-07-28T03:37:03.000Z",
+      "uid": "35240-b2588b05-1773-4b06-a5a6-6730b5b4c8c3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "info": {
+    "_postman_id": "9f4ac2e8-71a0-4a31-93b0-8b3565b06b60",
+    "name": "Zeebe REST Cluster Messages API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:04.000Z",
+    "updatedAt": "2026-07-28T03:37:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9f4ac2e8-71a0-4a31-93b0-8b3565b06b60"
+  },
+  "item": [
+    {
+      "name": "messages",
+      "item": [
+        {
+          "name": "publication",
+          "item": [
+            {
+              "name": "Zeebe Publish a Message",
+              "id": "8a64f002-2f7e-4810-9a56-5cc64433cfa8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"correlationKey\": \"<string>\",\n  \"timeToLive\": \"<long>\",\n  \"messageId\": \"<string>\",\n  \"variables\": {},\n  \"tenantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages/publication",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages",
+                    "publication"
+                  ]
+                },
+                "description": "Publishes a message for correlation with waiting subscriptions."
+              },
+              "response": [
+                {
+                  "id": "edc29160-8820-4dac-8f43-e23471938b7c",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"correlationKey\": \"<string>\",\n  \"timeToLive\": \"<long>\",\n  \"messageId\": \"<string>\",\n  \"variables\": {},\n  \"tenantId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/messages/publication",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messages",
+                        "publication"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:37:04.000Z",
+                  "updatedAt": "2026-07-28T03:37:04.000Z",
+                  "uid": "35240-edc29160-8820-4dac-8f43-e23471938b7c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:37:04.000Z",
+              "updatedAt": "2026-07-28T03:37:04.000Z",
+              "uid": "35240-8a64f002-2f7e-4810-9a56-5cc64433cfa8"
+            }
+          ],
+          "id": "af047e28-37c4-4059-910f-bf3b33728b5e",
+          "createdAt": "2026-07-28T03:37:04.000Z",
+          "updatedAt": "2026-07-28T03:37:04.000Z",
+          "uid": "35240-af047e28-37c4-4059-910f-bf3b33728b5e"
+        }
+      ],
+      "id": "ed611074-3c7b-42c6-a34c-6536a7d030f4",
+      "createdAt": "2026-07-28T03:37:04.000Z",
+      "updatedAt": "2026-07-28T03:37:04.000Z",
+      "uid": "35240-ed611074-3c7b-42c6-a34c-6536a7d030f4"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

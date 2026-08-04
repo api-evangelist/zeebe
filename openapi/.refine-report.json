@@ -1,0 +1,30 @@
+{
+  "provider": "zeebe",
+  "sources": [
+    "zeebe-cluster-api-openapi.yml",
+    "zeebe-deployments-api-openapi.yml",
+    "zeebe-incidents-api-openapi.yml",
+    "zeebe-jobs-api-openapi.yml",
+    "zeebe-messages-api-openapi.yml",
+    "zeebe-process-instances-api-openapi.yml",
+    "zeebe-resources-api-openapi.yml",
+    "zeebe-signals-api-openapi.yml",
+    "zeebe-user-tasks-api-openapi.yml"
+  ],
+  "outputs": [
+    "zeebe-cluster-api-openapi.yml",
+    "zeebe-deployments-api-openapi.yml",
+    "zeebe-incidents-api-openapi.yml",
+    "zeebe-jobs-api-openapi.yml",
+    "zeebe-messages-api-openapi.yml",
+    "zeebe-process-instances-api-openapi.yml",
+    "zeebe-resources-api-openapi.yml",
+    "zeebe-signals-api-openapi.yml",
+    "zeebe-user-tasks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

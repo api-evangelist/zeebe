@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "106176d2-d0a7-46f7-9618-333cb2449fa4",
+    "name": "Zeebe REST Cluster Incidents API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:02.000Z",
+    "updatedAt": "2026-07-28T03:37:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-106176d2-d0a7-46f7-9618-333cb2449fa4"
+  },
+  "item": [
+    {
+      "name": "incidents",
+      "item": [
+        {
+          "name": "{incidentKey}",
+          "item": [
+            {
+              "name": "resolution",
+              "item": [
+                {
+                  "name": "Zeebe Resolve an Incident",
+                  "id": "eedb8e64-de7b-4480-8614-65ed476372e0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/incidents/:incidentKey/resolution",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "incidents",
+                        ":incidentKey",
+                        "resolution"
+                      ],
+                      "variable": [
+                        {
+                          "id": "413dc33b-3c5b-4fbf-b30d-56b513eb24df",
+                          "key": "incidentKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Resolves an incident to retry the failed operation."
+                  },
+                  "response": [
+                    {
+                      "id": "cf3f684e-f8ce-4ade-a62c-804cf9713102",
+                      "name": "Incident resolved",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/incidents/:incidentKey/resolution",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "incidents",
+                            ":incidentKey",
+                            "resolution"
+                          ],
+                          "variable": [
+                            {
+                              "key": "incidentKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:02.000Z",
+                      "updatedAt": "2026-07-28T03:37:02.000Z",
+                      "uid": "35240-cf3f684e-f8ce-4ade-a62c-804cf9713102"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:02.000Z",
+                  "updatedAt": "2026-07-28T03:37:02.000Z",
+                  "uid": "35240-eedb8e64-de7b-4480-8614-65ed476372e0"
+                }
+              ],
+              "id": "e1b99b06-dd0b-4617-af66-5ed9addb4484",
+              "createdAt": "2026-07-28T03:37:02.000Z",
+              "updatedAt": "2026-07-28T03:37:02.000Z",
+              "uid": "35240-e1b99b06-dd0b-4617-af66-5ed9addb4484"
+            }
+          ],
+          "id": "40478640-89f2-4327-9a13-222d647a0531",
+          "createdAt": "2026-07-28T03:37:02.000Z",
+          "updatedAt": "2026-07-28T03:37:02.000Z",
+          "uid": "35240-40478640-89f2-4327-9a13-222d647a0531"
+        }
+      ],
+      "id": "7013a076-c606-4b67-b009-0c8cd8e75f56",
+      "createdAt": "2026-07-28T03:37:02.000Z",
+      "updatedAt": "2026-07-28T03:37:02.000Z",
+      "uid": "35240-7013a076-c606-4b67-b009-0c8cd8e75f56"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

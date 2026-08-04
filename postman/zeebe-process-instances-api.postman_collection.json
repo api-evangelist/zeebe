@@ -1,0 +1,337 @@
+{
+  "info": {
+    "_postman_id": "4aa4972d-0079-419a-b3cb-644bca4314e7",
+    "name": "Zeebe REST Cluster Process Instances API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:05.000Z",
+    "updatedAt": "2026-07-28T03:37:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4aa4972d-0079-419a-b3cb-644bca4314e7"
+  },
+  "item": [
+    {
+      "name": "process-instances",
+      "item": [
+        {
+          "name": "{processInstanceKey}",
+          "item": [
+            {
+              "name": "migration",
+              "item": [
+                {
+                  "name": "Zeebe Migrate a Process Instance",
+                  "id": "db0bfcf8-ac56-4ef1-848b-5a9ce789b5e5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"targetProcessDefinitionKey\": \"<long>\",\n  \"mappingInstructions\": [\n    {\n      \"sourceElementId\": \"<string>\",\n      \"targetElementId\": \"<string>\"\n    },\n    {\n      \"sourceElementId\": \"<string>\",\n      \"targetElementId\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/process-instances/:processInstanceKey/migration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "process-instances",
+                        ":processInstanceKey",
+                        "migration"
+                      ],
+                      "variable": [
+                        {
+                          "id": "01d6e660-ef2a-40e5-9038-b5653b24f057",
+                          "key": "processInstanceKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Migrates a process instance to a new process definition version."
+                  },
+                  "response": [
+                    {
+                      "id": "073f624f-04de-4cf2-b0bc-28c17321ee91",
+                      "name": "Migration initiated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"targetProcessDefinitionKey\": \"<long>\",\n  \"mappingInstructions\": [\n    {\n      \"sourceElementId\": \"<string>\",\n      \"targetElementId\": \"<string>\"\n    },\n    {\n      \"sourceElementId\": \"<string>\",\n      \"targetElementId\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/process-instances/:processInstanceKey/migration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "process-instances",
+                            ":processInstanceKey",
+                            "migration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "processInstanceKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:05.000Z",
+                      "updatedAt": "2026-07-28T03:37:05.000Z",
+                      "uid": "35240-073f624f-04de-4cf2-b0bc-28c17321ee91"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:05.000Z",
+                  "updatedAt": "2026-07-28T03:37:05.000Z",
+                  "uid": "35240-db0bfcf8-ac56-4ef1-848b-5a9ce789b5e5"
+                }
+              ],
+              "id": "d11bb0ef-f8a4-450c-8535-589956d00b50",
+              "createdAt": "2026-07-28T03:37:05.000Z",
+              "updatedAt": "2026-07-28T03:37:05.000Z",
+              "uid": "35240-d11bb0ef-f8a4-450c-8535-589956d00b50"
+            },
+            {
+              "name": "Zeebe Cancel a Process Instance",
+              "id": "db09d74b-444b-4f98-8779-690e499820ad",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/process-instances/:processInstanceKey",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "process-instances",
+                    ":processInstanceKey"
+                  ],
+                  "variable": [
+                    {
+                      "id": "315c4c31-ecb2-42b2-9f56-c23d811cf255",
+                      "key": "processInstanceKey",
+                      "value": "<long>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Cancels a running process instance."
+              },
+              "response": [
+                {
+                  "id": "e961a37d-ea57-417b-81e9-90b1055145ef",
+                  "name": "Process instance cancelled",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/process-instances/:processInstanceKey",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "process-instances",
+                        ":processInstanceKey"
+                      ],
+                      "variable": [
+                        {
+                          "key": "processInstanceKey"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:37:05.000Z",
+                  "updatedAt": "2026-07-28T03:37:05.000Z",
+                  "uid": "35240-e961a37d-ea57-417b-81e9-90b1055145ef"
+                }
+              ],
+              "createdAt": "2026-07-28T03:37:05.000Z",
+              "updatedAt": "2026-07-28T03:37:05.000Z",
+              "uid": "35240-db09d74b-444b-4f98-8779-690e499820ad"
+            }
+          ],
+          "id": "1008fea6-5660-495f-a72d-37cccb34623b",
+          "createdAt": "2026-07-28T03:37:05.000Z",
+          "updatedAt": "2026-07-28T03:37:05.000Z",
+          "uid": "35240-1008fea6-5660-495f-a72d-37cccb34623b"
+        },
+        {
+          "name": "Zeebe Create a Process Instance",
+          "id": "080e45c7-74af-4d35-90e2-8bf78c82c50d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"processDefinitionKey\": \"<long>\",\n  \"bpmnProcessId\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"variables\": {},\n  \"tenantId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/process-instances",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "process-instances"
+              ]
+            },
+            "description": "Creates and starts a new process instance in Zeebe."
+          },
+          "response": [
+            {
+              "id": "0cb70347-bd6f-474b-a19b-1711beaa6e8f",
+              "name": "Successful response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"processDefinitionKey\": \"<long>\",\n  \"bpmnProcessId\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"variables\": {},\n  \"tenantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/process-instances",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "process-instances"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"processInstanceKey\": \"<long>\",\n  \"processDefinitionKey\": \"<long>\",\n  \"bpmnProcessId\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"tenantId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:37:05.000Z",
+              "updatedAt": "2026-07-28T03:37:05.000Z",
+              "uid": "35240-0cb70347-bd6f-474b-a19b-1711beaa6e8f"
+            }
+          ],
+          "createdAt": "2026-07-28T03:37:05.000Z",
+          "updatedAt": "2026-07-28T03:37:05.000Z",
+          "uid": "35240-080e45c7-74af-4d35-90e2-8bf78c82c50d"
+        }
+      ],
+      "id": "c8b01ee1-f431-4f81-b4e2-27df8152379d",
+      "createdAt": "2026-07-28T03:37:05.000Z",
+      "updatedAt": "2026-07-28T03:37:05.000Z",
+      "uid": "35240-c8b01ee1-f431-4f81-b4e2-27df8152379d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

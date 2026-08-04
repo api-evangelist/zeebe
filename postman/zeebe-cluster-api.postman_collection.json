@@ -1,0 +1,112 @@
+{
+  "info": {
+    "_postman_id": "477a43df-956a-4d5c-8bf6-eabf9ae0478e",
+    "name": "Zeebe REST Cluster API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:00.000Z",
+    "updatedAt": "2026-07-28T03:37:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-477a43df-956a-4d5c-8bf6-eabf9ae0478e"
+  },
+  "item": [
+    {
+      "name": "topology",
+      "item": [
+        {
+          "name": "Zeebe Get Cluster Topology",
+          "id": "1b873130-2256-4ca8-a35c-c1cb57604891",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/topology",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "topology"
+              ]
+            },
+            "description": "Returns the current topology of the Zeebe cluster including brokers and partitions."
+          },
+          "response": [
+            {
+              "id": "f8d93cd1-8c37-4aaf-8eca-2d8aa80e004a",
+              "name": "Successful response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/topology",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "topology"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"brokers\": [\n    {\n      \"nodeId\": \"<integer>\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"version\": \"<string>\",\n      \"partitions\": [\n        {\n          \"partitionId\": \"<integer>\",\n          \"role\": \"<string>\",\n          \"health\": \"<string>\"\n        },\n        {\n          \"partitionId\": \"<integer>\",\n          \"role\": \"<string>\",\n          \"health\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"nodeId\": \"<integer>\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"version\": \"<string>\",\n      \"partitions\": [\n        {\n          \"partitionId\": \"<integer>\",\n          \"role\": \"<string>\",\n          \"health\": \"<string>\"\n        },\n        {\n          \"partitionId\": \"<integer>\",\n          \"role\": \"<string>\",\n          \"health\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"clusterSize\": \"<integer>\",\n  \"partitionsCount\": \"<integer>\",\n  \"replicationFactor\": \"<integer>\",\n  \"gatewayVersion\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:37:01.000Z",
+              "updatedAt": "2026-07-28T03:37:01.000Z",
+              "uid": "35240-f8d93cd1-8c37-4aaf-8eca-2d8aa80e004a"
+            }
+          ],
+          "createdAt": "2026-07-28T03:37:01.000Z",
+          "updatedAt": "2026-07-28T03:37:01.000Z",
+          "uid": "35240-1b873130-2256-4ca8-a35c-c1cb57604891"
+        }
+      ],
+      "id": "1c83a3d0-03c9-4eff-b742-dbfcff9ee7da",
+      "createdAt": "2026-07-28T03:37:01.000Z",
+      "updatedAt": "2026-07-28T03:37:01.000Z",
+      "uid": "35240-1c83a3d0-03c9-4eff-b742-dbfcff9ee7da"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

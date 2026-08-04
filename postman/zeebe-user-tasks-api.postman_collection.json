@@ -1,0 +1,276 @@
+{
+  "info": {
+    "_postman_id": "97088b93-07db-4e12-816a-2a5875d8605b",
+    "name": "Zeebe REST Cluster User Tasks API",
+    "description": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:07.000Z",
+    "updatedAt": "2026-07-28T03:37:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-97088b93-07db-4e12-816a-2a5875d8605b"
+  },
+  "item": [
+    {
+      "name": "user-tasks",
+      "item": [
+        {
+          "name": "{userTaskKey}",
+          "item": [
+            {
+              "name": "assignment",
+              "item": [
+                {
+                  "name": "Zeebe Assign a User Task",
+                  "id": "5dcb0d97-411e-493d-a6c8-f304432ff2cb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"assignee\": \"<string>\",\n  \"allowOverride\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user-tasks/:userTaskKey/assignment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user-tasks",
+                        ":userTaskKey",
+                        "assignment"
+                      ],
+                      "variable": [
+                        {
+                          "id": "89f69464-4d94-4435-8a50-d9af1acfcdfa",
+                          "key": "userTaskKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Assigns a user task to a specific user."
+                  },
+                  "response": [
+                    {
+                      "id": "4a69fac0-a466-46e3-af0d-97889da35533",
+                      "name": "Task assigned",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"assignee\": \"<string>\",\n  \"allowOverride\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user-tasks/:userTaskKey/assignment",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user-tasks",
+                            ":userTaskKey",
+                            "assignment"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userTaskKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:08.000Z",
+                      "updatedAt": "2026-07-28T03:37:08.000Z",
+                      "uid": "35240-4a69fac0-a466-46e3-af0d-97889da35533"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:08.000Z",
+                  "updatedAt": "2026-07-28T03:37:08.000Z",
+                  "uid": "35240-5dcb0d97-411e-493d-a6c8-f304432ff2cb"
+                }
+              ],
+              "id": "b0385cf6-d3c2-4d9c-bfd8-64fa5e09c8f1",
+              "createdAt": "2026-07-28T03:37:08.000Z",
+              "updatedAt": "2026-07-28T03:37:08.000Z",
+              "uid": "35240-b0385cf6-d3c2-4d9c-bfd8-64fa5e09c8f1"
+            },
+            {
+              "name": "completion",
+              "item": [
+                {
+                  "name": "Zeebe Complete a User Task",
+                  "id": "4dda0f5e-681e-4fe8-a687-4b05852699e9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"variables\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/user-tasks/:userTaskKey/completion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user-tasks",
+                        ":userTaskKey",
+                        "completion"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7b98f0a9-e20c-4d03-a0e6-12e54a43471e",
+                          "key": "userTaskKey",
+                          "value": "<long>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Completes a user task with optional variables."
+                  },
+                  "response": [
+                    {
+                      "id": "6e722e64-f64e-4c04-9711-5bfc8cbed7cc",
+                      "name": "Task completed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"variables\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/user-tasks/:userTaskKey/completion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user-tasks",
+                            ":userTaskKey",
+                            "completion"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userTaskKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:08.000Z",
+                      "updatedAt": "2026-07-28T03:37:08.000Z",
+                      "uid": "35240-6e722e64-f64e-4c04-9711-5bfc8cbed7cc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:08.000Z",
+                  "updatedAt": "2026-07-28T03:37:08.000Z",
+                  "uid": "35240-4dda0f5e-681e-4fe8-a687-4b05852699e9"
+                }
+              ],
+              "id": "3cb15108-0745-4bda-9cf0-04b790a160f0",
+              "createdAt": "2026-07-28T03:37:08.000Z",
+              "updatedAt": "2026-07-28T03:37:08.000Z",
+              "uid": "35240-3cb15108-0745-4bda-9cf0-04b790a160f0"
+            }
+          ],
+          "id": "8118870f-b1e8-49ef-a134-c8c7cbfe7449",
+          "createdAt": "2026-07-28T03:37:08.000Z",
+          "updatedAt": "2026-07-28T03:37:08.000Z",
+          "uid": "35240-8118870f-b1e8-49ef-a134-c8c7cbfe7449"
+        }
+      ],
+      "id": "59162446-71a3-4de0-8d48-dbb1a7bb1c29",
+      "createdAt": "2026-07-28T03:37:08.000Z",
+      "updatedAt": "2026-07-28T03:37:08.000Z",
+      "uid": "35240-59162446-71a3-4de0-8d48-dbb1a7bb1c29"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
