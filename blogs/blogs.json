@@ -5,7 +5,7 @@
       "source": "https://camunda.com/feed/",
       "feed_url": "https://camunda.com/feed/",
       "title": "",
-      "saved": 0,
+      "saved": 1,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 64,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 65,
+  "fetched": "2026-08-15T12:11:08Z"
 }
