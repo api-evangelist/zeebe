@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST Cluster Signals API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Broadcast a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/signals/broadcast",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Broadcasts a signal to all matching signal subscriptions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

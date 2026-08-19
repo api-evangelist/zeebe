@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST Cluster Process Instances API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Process Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Create a Process Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and starts a new process instance in Zeebe."
+        },
+        {
+          "info": {
+            "name": "Zeebe Cancel a Process Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "100",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a running process instance."
+        },
+        {
+          "info": {
+            "name": "Zeebe Migrate a Process Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey/migration",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrates a process instance to a new process definition version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

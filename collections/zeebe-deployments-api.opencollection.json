@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST Cluster Deployments API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Deploy Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/deployments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "resources",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "tenantId",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deploys one or more BPMN process definitions, DMN decisions, or forms to Zeebe."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

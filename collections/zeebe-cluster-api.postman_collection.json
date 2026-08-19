@@ -1,0 +1,148 @@
+{
+  "item": [
+    {
+      "id": "d246f176-2d98-4b92-8bd3-f88ed2afa1cb",
+      "name": "Cluster",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da7a9d02-64d2-4ddf-b420-843834ef8db6",
+          "name": "Zeebe Get Cluster Topology",
+          "request": {
+            "name": "Zeebe Get Cluster Topology",
+            "description": {
+              "content": "Returns the current topology of the Zeebe cluster including brokers and partitions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "topology"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "698cf824-5d7b-449d-845b-2c70cc92e888",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"brokers\": [\n    {\n      \"nodeId\": 100,\n      \"host\": \"example-value\",\n      \"port\": 100,\n      \"version\": \"1.0.0\",\n      \"partitions\": [\n        {\n          \"partitionId\": {},\n          \"role\": {},\n          \"health\": {}\n        }\n      ]\n    }\n  ],\n  \"clusterSize\": 100,\n  \"partitionsCount\": 100,\n  \"replicationFactor\": 100,\n  \"gatewayVersion\": \"1.0.0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "{{baseUrl}}/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a5e62f7f-d98a-4801-a8fb-084870e47087",
+    "name": "Zeebe REST Cluster API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.\n\nContact Support:\n Name: Camunda",
+      "type": "text/plain"
+    }
+  }
+}

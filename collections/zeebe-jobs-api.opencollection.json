@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST Cluster Jobs API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Activate Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/activation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates jobs of a given type for processing by a worker."
+        },
+        {
+          "info": {
+            "name": "Zeebe Complete a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/completion",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a job with the given payload."
+        },
+        {
+          "info": {
+            "name": "Zeebe Fail a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/failure",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reports a job failure to trigger retry or incident."
+        },
+        {
+          "info": {
+            "name": "Zeebe Throw Error for a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/error",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Throws a BPMN error for a job to trigger error boundary events."
+        },
+        {
+          "info": {
+            "name": "Zeebe Update Job Retries",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{baseUrl}/v2/jobs/:jobKey/retries",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the number of retries for a job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

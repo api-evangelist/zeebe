@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST Cluster User Tasks API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Assign a User Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/assignment",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a user task to a specific user."
+        },
+        {
+          "info": {
+            "name": "Zeebe Complete a User Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/completion",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "100",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a user task with optional variables."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zeebe REST Cluster Incidents API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Zeebe Resolve an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/incidents/:incidentKey/resolution",
+            "params": [
+              {
+                "name": "incidentKey",
+                "value": "100",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resolves an incident to retry the failed operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
