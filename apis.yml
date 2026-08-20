@@ -23,6 +23,15 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zeebe.png
 tags:
   - BPMN
   - Camunda
+  - Cloud-Native
+  - Distributed Systems
+  - Java
+  - Microservices
+  - Process Automation
+  - Workflow Orchestration
+tags_raw:
+  - BPMN
+  - Camunda
   - Cloud Native
   - Distributed Systems
   - Java
@@ -71,6 +80,8 @@ apis:
   humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
   baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
@@ -133,6 +144,8 @@ apis:
   humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
   baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -164,6 +177,8 @@ apis:
   humanURL: https://docs.camunda.io/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
   baseURL: https://{region}.zeebe.camunda.io:443/{clusterId}/v2
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
