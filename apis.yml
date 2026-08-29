@@ -6,6 +6,18 @@ description: >-
   It implements BPMN 2.0 process execution and provides a REST API for process deployment, instance management, job
   handling, message correlation, and cluster topology queries.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
