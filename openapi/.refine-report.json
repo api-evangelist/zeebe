@@ -25,6 +25,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "zeebe-cluster-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-deployments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-incidents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-jobs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-messages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-process-instances-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-resources-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-signals-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-user-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
