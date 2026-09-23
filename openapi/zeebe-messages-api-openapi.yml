@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Zeebe REST Cluster Messages API
+  title: Zeebe REST Messages API
   description: The Zeebe REST API provides endpoints for interacting with the Zeebe workflow engine that powers Camunda 8, including process deployment, instance management, job handling, and cluster topology queries.
   version: 8.6.0
   contact:

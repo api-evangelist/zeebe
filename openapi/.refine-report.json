@@ -1,15 +1,7 @@
 {
   "provider": "zeebe",
   "sources": [
-    "zeebe-cluster-api-openapi.yml",
-    "zeebe-deployments-api-openapi.yml",
-    "zeebe-incidents-api-openapi.yml",
-    "zeebe-jobs-api-openapi.yml",
-    "zeebe-messages-api-openapi.yml",
-    "zeebe-process-instances-api-openapi.yml",
-    "zeebe-resources-api-openapi.yml",
-    "zeebe-signals-api-openapi.yml",
-    "zeebe-user-tasks-api-openapi.yml"
+    "_original/zeebe-api.yml"
   ],
   "outputs": [
     "zeebe-cluster-api-openapi.yml",
@@ -26,16 +18,28 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "zeebe-cluster-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-deployments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-incidents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-jobs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-messages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-process-instances-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-resources-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-signals-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "zeebe-user-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "zeebe-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "zeebe-api.yml: declared missing tag: Cluster",
+    "zeebe-api.yml: declared missing tag: Deployments",
+    "zeebe-api.yml: declared missing tag: Incidents",
+    "zeebe-api.yml: declared missing tag: Jobs",
+    "zeebe-api.yml: declared missing tag: Messages",
+    "zeebe-api.yml: declared missing tag: Process Instances",
+    "zeebe-api.yml: declared missing tag: Resources",
+    "zeebe-api.yml: declared missing tag: Signals",
+    "zeebe-api.yml: declared missing tag: User Tasks",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "zeebe-cluster-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-incidents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-process-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-signals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zeebe-user-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
