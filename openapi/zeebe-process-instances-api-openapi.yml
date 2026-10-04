@@ -135,6 +135,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateProcessInstanceRequest:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+          example: 100
+        bpmnProcessId:
+          type: string
+          example: '500123'
+        version:
+          type: integer
+          example: 100
+        variables:
+          type: object
+          example: {}
+        tenantId:
+          type: string
+          example: '500123'
     ProcessInstance:
       type: object
       properties:
@@ -152,25 +171,6 @@ components:
         version:
           type: integer
           example: 100
-        tenantId:
-          type: string
-          example: '500123'
-    CreateProcessInstanceRequest:
-      type: object
-      properties:
-        processDefinitionKey:
-          type: integer
-          format: int64
-          example: 100
-        bpmnProcessId:
-          type: string
-          example: '500123'
-        version:
-          type: integer
-          example: 100
-        variables:
-          type: object
-          example: {}
         tenantId:
           type: string
           example: '500123'

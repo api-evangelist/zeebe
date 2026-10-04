@@ -235,38 +235,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ActivateJobsRequest:
-      type: object
-      required:
-      - type
-      - timeout
-      - maxJobsToActivate
-      properties:
-        type:
-          type: string
-          example: standard
-        timeout:
-          type: integer
-          format: int64
-          example: 100
-        maxJobsToActivate:
-          type: integer
-          example: 100
-        worker:
-          type: string
-          example: example-value
-        fetchVariable:
-          type: array
-          items:
-            type: string
-          example:
-          - example-value
-        tenantIds:
-          type: array
-          items:
-            type: string
-          example:
-          - example-value
     Job:
       type: object
       properties:
@@ -314,6 +282,38 @@ components:
         tenantId:
           type: string
           example: '500123'
+    ActivateJobsRequest:
+      type: object
+      required:
+      - type
+      - timeout
+      - maxJobsToActivate
+      properties:
+        type:
+          type: string
+          example: standard
+        timeout:
+          type: integer
+          format: int64
+          example: 100
+        maxJobsToActivate:
+          type: integer
+          example: 100
+        worker:
+          type: string
+          example: example-value
+        fetchVariable:
+          type: array
+          items:
+            type: string
+          example:
+          - example-value
+        tenantIds:
+          type: array
+          items:
+            type: string
+          example:
+          - example-value
   securitySchemes:
     BearerAuth:
       type: http
