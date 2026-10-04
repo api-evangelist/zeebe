@@ -346,6 +346,9 @@ apis:
   - type: Capabilities
     url: https://raw.githubusercontent.com/api-evangelist/zeebe/refs/heads/main/capabilities/
 common:
+  - type: CapabilityMap
+    url: capabilities/zeebe-capability-edges.yml
+    name: Zeebe Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/zeebe/overview
   - type: AgenticAccess
